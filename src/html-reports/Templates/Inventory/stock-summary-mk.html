@@ -1,0 +1,360 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Out Register Summary</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+
+      html {
+        font-size: 0.65rem;
+      }
+
+      thead th {
+        background-color: #e0edf1;
+      }
+
+      /* @include media-breakpoint-up(sm) {
+        html {
+          font-size: 1.2rem;
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        html {
+          font-size: 1.4rem;
+        }
+      }
+
+      @include media-breakpoint-up(lg) {
+        html {
+          font-size: 1.6rem;
+        }
+      } */
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    {{/if}}
+    <p class="font-weight-bold text-center ">
+      {{data.ReportHdr.Hdr}} ({{data.ReportHdr.FromDate}} To
+      {{data.ReportHdr.ToDate}})
+    </p>
+    <hr class="my-3" />
+    <main>
+      <!-- <table class="table table-bordered table-striped">
+        <thead>
+          <tr class="">
+            <th scope="col" class="text-left">Sr.No.</th>
+          </tr>
+        </thead>
+      </table> -->
+      {{#each data.ReportGroup}}
+      <h5 class="font-weight-bold text-left ">
+        {{this.GroupName}}
+      </h5>
+
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th
+              rowspan="2"
+              colspan="1"
+              style="vertical-align : middle;text-align:center;"
+            >
+              Sr. No.
+            </th>
+            <th
+              rowspan="2"
+              colspan="1"
+              style="vertical-align : middle;text-align:left;"
+            >
+              Item Code
+            </th>
+            <th
+              rowspan="2"
+              colspan="1"
+              style="vertical-align : middle;text-align:left;"
+            >
+              Item Name
+            </th>
+            <th colspan="2" style="vertical-align : middle;text-align:center;">
+              Opening
+            </th>
+            <th
+              rowspan="1"
+              colspan="2"
+              style="vertical-align : middle;text-align:center;"
+            >
+              Stock In
+            </th>
+            <th
+              rowspan="1"
+              colspan="2"
+              style="vertical-align : middle;text-align:center;"
+            >
+              Stock Out
+            </th>
+            <th
+              rowspan="1"
+              colspan="2"
+              style="vertical-align : middle;text-align:center;"
+            >
+              Closing
+            </th>
+          </tr>
+          <!-- <tr>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Purchase
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Transfer In
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Sale Return
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Adjustment (+)
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Sales
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Transfer Out
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Purchase Return
+                    </th>
+                    <th colspan="2" style="vertical-align : middle;text-align:center;">
+                        Adjustment (-)
+                    </th>
+                </tr> -->
+          <tr>
+            <th class="p-2 text-right">Qty</th>
+            <th class="p-2 text-right">Amount</th>
+
+            <th class="p-2 text-right">Qty</th>
+            <th class="p-2 text-right">Amount</th>
+
+            <th class="p-2 text-right">Qty</th>
+            <th class="p-2 text-right">Amount</th>
+
+            <th class="p-2 text-right">Qty</th>
+            <th class="p-2 text-right">Amount</th>
+            <!-- 
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th>
+
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th>
+
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th>
+
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th>
+
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th>
+
+                    <th class="p-2 text-center">Qty</th>
+                    <th class="p-2 text-right">Amount</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.DetailRows}}
+          <tr>
+            <td scope="row" class="p-2 font-weight-bold">{{this.SrNo}}</td>
+            <td scope="row" class="p-2">
+              {{this.ItemCode}}
+            </td>
+            <td scope="row" class="p-2 font-weight-bold">
+              {{this.ItemName}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.OpeningQty}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.OpeningAmount}}
+            </td>
+
+            <td scope="row" class="p-2 text-right">
+              {{this.StockInQty}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.StockInAmount}}
+            </td>
+            <!-- 
+                    <td scope="row" class="p-2 text-center">
+                        {{this.TransferInQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.TransferInAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center">
+                        {{this.SaleReturnQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.SaleReturnAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center">
+                        {{this.StockAdjPlusQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.StockAdjPlusAmount}}
+                    </td> -->
+
+            <td scope="row" class="p-2 text-right">
+              {{this.StockOutQty}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.StockOutAmount}}
+            </td>
+            <!-- 
+                    <td scope="row" class="p-2 text-center">
+                        {{this.TransferOutQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.TransferOutAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center">
+                        {{this.PurchaseReturnQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.PurchaseReturnAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center">
+                        {{this.StockAdjMinusQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right">
+                        {{this.StockAdjMinusAmount}}
+                    </td> -->
+
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.ClosingStockQty}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.ClosingAmount}}
+            </td>
+          </tr>
+
+          {{/each}}
+          <tr>
+            <td colspan="3" scope="row" class="p-2 font-weight-bold">
+              Total for ({{this.GroupName}})
+            </td>
+            <td scope="row" class="p-2 text-center font-weight-bold">
+              {{this.Sum_OpeningQty}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_OpeningAmount}}
+            </td>
+
+            <td scope="row" class="p-2 text-center font-weight-bold">
+              {{this.Sum_StockInQty}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_StockInAmount}}
+            </td>
+
+            <!-- <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_TransferInQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_TransferInAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_SaleReturnQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_SaleReturnAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_StockAdjPlusQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_StockAdjPlusAmount}}
+                    </td> -->
+
+            <td scope="row" class="p-2 text-center font-weight-bold">
+              {{this.Sum_StockOutQty}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_StockOutAmount}}
+            </td>
+
+            <!-- <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_TransferOutQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_TransferOutAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_PurchaseReturnQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_PurchaseReturnAmount}}
+                    </td>
+
+                    <td scope="row" class="p-2 text-center font-weight-bold">
+                        {{this.Sum_StockAdjMinusQty}}
+                    </td>
+                    <td scope="row" class="p-2 text-right font-weight-bold">
+                        {{this.Sum_StockAdjMinusAmount}}
+                    </td> -->
+
+            <td scope="row" class="p-2 text-center font-weight-bold">
+              {{this.Sum_ClosingQty}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_ClosingAmount}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="my-3" />
+      {{/each}}
+    </main>
+  </body>
+</html>

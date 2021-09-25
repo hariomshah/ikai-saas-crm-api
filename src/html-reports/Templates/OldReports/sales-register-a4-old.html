@@ -1,0 +1,201 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>sales register</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+
+  <body id="customer-invoice">
+    <header class="clearfix">
+        {{#if ReportConfig.Config.showReportHeader}}
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+        </div>
+      </div>
+      <div id="company">
+        <div style="font-size: 1.2em!important;">
+          <b>{{ReportConfig.GeneralInfo.compName}}</b>
+        </div>
+        <div>
+          {{ReportConfig.GeneralInfo.address1}},<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+        <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      <div id="divider"></div>
+      {{/if}}
+      <div id="project">
+        {{data.SalesSummary.ReportTitle}}
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr class="saurav-test-purchase">
+            <th class="TranId" style="text-align: left;width: 5%;padding: 5px">Vch.Id</th>
+            <th class="TranNo" style="text-align: left;width: 7%;padding: 5px">Vch.No</th>
+            <th class="TranNo" style="text-align: left;width: 7%;padding: 5px">Vch.Date</th>
+            <th class="RefDesc" style="text-align: left;">Customer Name</th>
+            <th
+              class="Amount"
+              style="text-align: right; width: 10%;padding: 5px"
+            >
+              Gross Amt.
+            </th>
+            <th
+              class="TranNo"
+              style="text-align: right;width: 8%;padding: 5px"
+            >
+              Discount
+            </th>
+            <th
+              class="TranNo"
+              style="text-align: right;width: 8%;padding: 5px"
+            >
+              Tax Amt.
+            </th>
+            <th
+              class="TranNo"
+              style="text-align: right;width: 8%;padding: 5px"
+            >
+              Misc Amt.
+            </th>
+            <th
+              class="TranNo"
+              style="text-align: right;width: 6%;padding: 5px"
+            >
+            Net Amt.
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+          {{#each data.SalesHdr}}
+          <tr >
+            <td class="service" style="padding: 5px"> 
+              {{this.VoucherId}}
+            </td>
+            <td class="service" style="padding: 5px">
+              {{this.VoucherNo}}
+            </td>
+            <td class="service" style="padding: 5px">
+              {{this.VoucherDate}}
+            </td>
+            <td class="service">
+              {{this.CustName}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px">
+              {{this.GrossAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px">
+              {{this.Discount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px">
+              {{this.TaxAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px">
+              {{this.MiscAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px">
+              {{this.NetAmount}}
+            </td>
+          </tr>
+          {{#if this.hasDetail}}<tr class="atul-test-purchase"><td colspan="9">
+            <table style="margin-bottom: 5px !important;"  class= "saurav-test-purchase">
+              <thead>
+                <tr>
+                  <th
+                    style="text-align: left;width: 4%;padding: 5px"
+                  >
+                    Sr.No
+                  </th>
+                  <th
+                    style="text-align: left;"
+                  >
+                    Item Name
+                  </th>
+                  <th
+                    style="text-align: right;width: 9%;padding: 5px"
+                  >
+                  Qty
+                  </th>
+                  <th style="text-align: right;width: 8%;padding: 5px">
+                    Cost Price
+                  </th>
+                  <th
+                    style="text-align: right; width: 8%;padding: 5px;"
+                  >
+                  Sale Price
+                  </th>
+                  <th
+                    style="text-align: right;width: 5%;padding: 5px;"
+                  >
+                  MRP
+                  </th>
+                  <th
+                    style="text-align: right;width: 8%;padding: 5px;"
+                  >
+                  Discount
+                  </th>
+                  <th
+                    style="text-align: right;width: 8%;padding: 5px;"
+                  >
+                  Tax.Amt
+                  </th>
+                  <th
+                    style="text-align: right;width: 8%;padding: 5px;"
+                  >
+                    Amount
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{#each this.SalesDtl}}
+                  <tr>
+                    <td class="service" style="padding: 5px">
+                      {{this.SrNo}}
+                    </td>
+                    <td class="service">
+                      {{this.ItemName}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.SaleQty}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.CostPrice}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.LandingSalePrice}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.MRP}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.DiscAmount}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.TaxAmount}}
+                    </td>
+                    <td class="service" style="text-align: right;padding: 5px">
+                      {{this.Amount}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+            </table>
+          {{/if}}
+         {{/each}} 
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

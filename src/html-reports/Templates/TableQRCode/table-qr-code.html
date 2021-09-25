@@ -1,0 +1,106 @@
+<html lang="en">
+  <head>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> -->
+    <script
+      src="https://kit.fontawesome.com/yourcode.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+    <style>
+      .arrow-up {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 300px solid red;
+        border-bottom: 115px solid transparent;
+      }
+      .arrow-up-1 {
+        width: 0;
+        height: 0;
+        /* border-left: 100px solid red; */
+        border-right: 500px solid silver;
+        border-bottom: 115px solid transparent;
+      }
+      .semi-circle {
+        position: absolute;
+        top: 380px;
+        left: 410px;
+        transform: translate(-50%, -50%);
+        height: 220px;
+        width: 180px;
+        border-radius: 100% 0 0 100% / 50%;
+        background-color: silver;
+      }
+    </style>
+  </head>
+  <body style="margin: 0 0 0;">
+    <div
+      style="width: 500px; height: 700px; margin: 0 0 0 ;background-color: grey; background-size: 500px 700px;background-repeat: no-repeat;"
+    >
+      <div style="display: flex;">
+        <div class="arrow-up"></div>
+        <div class="arrow-up-1"></div>
+      </div>
+      <div style="text-align: center;">
+        <img src="../../logo.png" style="height:130px; width:130px" />
+        <!-- <h3 style="color: red;">Scan the QR Code</h3> -->
+      </div>
+      <div style="display: flex; margin-top: 40px;">
+        <div style="flex: 0.6;">
+          <canvas id="qr-code" style="margin-left: 10px;"></canvas>
+          <h3 style="color : gold">SCAN CODE FOR ORDER</h3>
+        </div>
+        <div style="flex: 1;" class="semi-circle">
+          <h2 style="position: absolute; left: 60px; top: 74px;">Table-01</h2>
+        </div>
+      </div>
+      <div style="text-align:center; margin: 0 65px; color:gold">
+        <h3>OPEN FROM TUESDAY TO SUNDAY FROM 10AM TO 1PM</h3>
+      </div>
+      <footer style="margin-top: 40px;">
+        <div style="border-top: 8px solid gold;"></div>
+        <div
+          style="background-color: red;display: flex; padding: 5px; height: 60px;"
+        >
+          <!-- <div style="flex: 0.5;">
+          <h4 style="margin: 5px 0 0 0; color: silver;">Powered By</h4>
+          <img src="../../appicon.png" width="80px" height="80px" />
+        </div> -->
+          <!-- <div style="flex: 0.3">
+          <h4 style="margin: 5px 0 0 0 ; color: silver;">Contact Us</h4>
+          <h4 style="margin: 5px 0 0 0 ; color: silver;">Phone (95475 29854)</h3>
+        </div> -->
+          <!-- <div style="flex: 0.5; text-align: right;">
+          <h4 style="margin: 85px 0 0 0; color: silver;">www.example@gmail.com</h3>
+        </div> -->
+        </div>
+      </footer>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+      <script>
+        /* JS comes here */
+        var qr;
+        (function() {
+          let link = `http://202.134.151.202:4001/customer-self-order?compCode=1&tableName=T27&branchCode=ANDHERI&deptCode=KITCHEN&secCode=NONAC&tableNo=NAC-T27`;
+          qr = new QRious({
+            element: document.getElementById("qr-code"),
+            size: 200,
+            value: link,
+          });
+        })();
+
+        function generateQRCode() {
+          var qrtext = document.getElementById("qr-text").value;
+          document.getElementById("qr-result").innerHTML =
+            "QR code for " + qrtext + ":";
+          alert(qrtext);
+          qr.set({
+            foreground: "black",
+            size: 200,
+            value: qrtext,
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>

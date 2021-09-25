@@ -1,0 +1,205 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Livkwick Inovice</title>
+  <link rel="stylesheet" href="style.css" media="all" />
+</head>
+
+<body id="customer-invoice">
+  <header class="clearfix">
+    <div id="logo">
+      <div>
+        <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+      </div>
+    </div>
+    <div id="company">
+      <div>{{ReportConfig.GeneralInfo.compName}}</div>
+      <div>
+        {{ReportConfig.GeneralInfo.address1}} ,<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+      </div>
+      <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+      <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+      <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+      <div>
+        <a href="mailto:{{ReportConfig.GeneralInfo.email}}">{{ReportConfig.GeneralInfo.email}}</a>
+      </div>
+    </div>
+    <div id="divider"></div>
+    <div id="Invoice" class="clearfix">
+      <div><span>Invoice No.</span> {{data.InvoiceHdr.InvoiceNo}}</div>
+      <div><span>Invoice Date</span> {{data.InvoiceHdr.InvoiceDate}}</div>
+    </div>
+    <div id="project">
+      <!-- <div><span>PROJECT</span> Website development</div> -->
+      <div>
+        <!-- <span>CLIENT</span> -->
+        {{data.InvoiceHdr.Name}}
+      </div>
+      <div>
+        <!-- <span>ADDRESS</span> -->
+        {{data.InvoiceHdr.add1}}
+        ,{{data.InvoiceHdr.add3}},{{data.InvoiceHdr.add2}}
+        {{data.InvoiceHdr.PinCode}}
+      </div>
+      <div>
+        <!-- <span>EMAIL</span> -->
+        <a href="mailto:{{data.InvoiceHdr.email}}">{{data.InvoiceHdr.email}}</a>
+      </div>
+      <!-- <div><span>DATE</span> {{data.InvoiceHdr.currentData}}</div> -->
+    </div>
+  </header>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th class="service" style="width: 7%;">Sr No</th>
+          <th class="desc" style="width: 30%;">Description</th>
+          <th class="service" style="text-align: center;">Qty</th>
+          <th class="service"style="text-align: right;">Rate</th>
+          <th class="service"style="text-align: right;">CGST</th>
+          <th class="service" style="text-align: right; ">SGST</th>
+          <th style="text-align: right;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data.InvoiceDtl}}
+        <tr>
+          <td class="service">{{this.SrNo}}</td>
+          <td class="desc">
+            {{this.ItemName}} <br /><i style="font-size: 10;">
+              {{this.ItemDesc}}</i>
+          </td>
+          <td class="qty">{{this.Qty}}</td>
+          <td class="amount">{{this.Amount}}</td>
+          <td style="text-align: right;" class="amount">
+            {{this.CGST}}
+          </td>
+          <td style="text-align: right;" class="amount">
+            {{this.SGST}}
+          </td>
+          <td style="text-align: right;" class="amount">{{this.AmountInclTax}}</td>
+        </tr>
+        {{/each}}
+        <tr>
+          <td  class="total gross" rowspan="5" colspan="4">
+            <table class="account-table">
+              <thead>
+                  <tr>
+                      <th class="service-head" style="text-align: left;" style="width: 20%;">
+                          Bank Details
+                      </th>
+                      <th class="service" style="text-align: right;">
+                      </th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="account-detail account-label" style="text-align: left;">
+                          Account No :  
+                      </td>
+                      <td class="account-detail" style="text-align: left;">
+                          258010111999
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="account-detail account-label" style="text-align: left;">
+                          Holder Name :
+                      </td>
+                      <td class="account-detail" style="text-align: left;" >
+                        Livkwick Quality Services Pvt. Ltd.
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="account-detail account-label" style="text-align: left;">
+                          Bank Name :
+                      </td>
+                      <td class="account-detail" style="text-align: left;">
+                          Indusland Bank 
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="account-detail account-label" style="text-align: left;">
+                          Branch Name :
+                      </td>
+                      <td class="account-detail" style="text-align: left;">
+                          Kalyan
+                      </td>
+                  </tr>
+                  <tr>
+                      <td class="account-detail account-label" style="text-align: left;">
+                          IFSC Code :
+                      </td>
+                      <td class="account-detail" style="text-align: left;">
+                          INDB0000154
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          </td>
+          <td class="gross sub-total"  colspan="2">Gross Amount</td>
+          <td class="total gross">
+            {{data.InvoiceHdr.TaxExclusiveAmount}}
+          </td>
+        </tr>
+        <!-- {{#each data.TaxBreakup}}
+        <tr>
+          <td class="tax-total" colspan="2">Total CGST Amt.</td>
+          <td class="total">
+            {{this.CGST}}
+          </td>
+        </tr>
+        <tr>
+          <td class="tax-total" colspan="2">Total SGST Amt.</td>
+          <td class="total">
+            {{this.SGST}}
+          </td>
+        </tr>
+        {{/each}} -->
+         <tr>
+          <td class="tax-total" colspan="2">
+            Total Tax Amt.
+          </td>
+          <td class="total">
+            {{data.InvoiceHdr.TaxAmount}}
+          </td>
+        </tr>
+        <tr>
+          <td class="tax-total" colspan="2">Round Off</td>
+          <td class="total">{{data.InvoiceHdr.RoundOff}}</td>
+        </tr>
+        
+        <tr>
+          <td class="tax-total" colspan="2" class="grand total">
+            <b>Grand Total</b>
+          </td>
+          <td class="grand total" style="font-weight: 600;">
+            {{ReportConfig.GeneralInfo.Currency}}{{data.InvoiceHdr.InvoiceAmount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="in-words">
+      <b>Amount in Words:</b> {{data.InvoiceHdr.AmountInWords}}
+    </div>
+    <div id="divider"></div>
+    <div style="border:1px solid" id="notices">
+      <div style="border-bottom: 1px solid;" class="notice">
+        Note:
+      </div>
+      <div class="note">
+        - This is computer generated invoice duely authenticated & requires no signature.</br>
+        - e & oe accepted within 30 days from the invoice detail
+      </div>
+    </div>
+  </main>
+  <!-- <footer>
+      Invoice was created on a computer and is valid without the signature and
+      seal.
+    </footer> -->
+</body>
+
+</html>

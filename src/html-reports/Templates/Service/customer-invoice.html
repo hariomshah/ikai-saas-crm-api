@@ -1,0 +1,120 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Example 1</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+  <body id="customer-invoice">
+    <header class="clearfix">
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+        </div>
+      </div>
+      <div id="company">
+        <div>{{ReportConfig.GeneralInfo.compName}}</div>
+        <div>
+          {{ReportConfig.GeneralInfo.address1}} ,<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      <div id="divider"></div>
+      <div id="Invoice" class="clearfix">
+        <div><span>Invoice No.</span> {{data.InvoiceHdr.InvoiceNo}}</div>
+        <div><span>Invoice Date</span> {{data.InvoiceHdr.InvoiceDate}}</div>
+      </div>
+      <div id="project">
+        <!-- <div><span>PROJECT</span> Website development</div> -->
+        <div>
+          <!-- <span>CLIENT</span> -->
+          {{data.InvoiceHdr.Name}}
+        </div>
+        <div>
+          <!-- <span>ADDRESS</span> -->
+          {{data.InvoiceHdr.add1}}
+          ,{{data.InvoiceHdr.add3}},{{data.InvoiceHdr.add2}}
+          {{data.InvoiceHdr.PinCode}}
+        </div>
+        <div>
+          <!-- <span>EMAIL</span> -->
+          <a href="mailto:{{data.InvoiceHdr.email}}"
+            >{{data.InvoiceHdr.email}}</a
+          >
+        </div>
+        <!-- <div><span>DATE</span> {{data.InvoiceHdr.currentData}}</div> -->
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th class="service">Sr No</th>
+            <th class="desc">Description</th>
+            <th>Rate</th>
+            <th>Qty</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.InvoiceDtl}}
+          <tr>
+            <td class="service">{{this.SrNo}}</td>
+            <td class="desc">
+              {{this.ItemName}} <br /><i> {{this.ItemDesc}}</i>
+            </td>
+            <td class="amount">{{this.Rate}}</td>
+            <td class="qty">{{this.Qty}}</td>
+            <td style="text-align: right;" class="amount">{{this.Amount}}</td>
+          </tr>
+          {{/each}}
+          <tr>
+            <td class="gross sub-total" colspan="4">Gross Amount</td>
+            <td class="total gross">
+              {{data.InvoiceHdr.TaxExclusiveAmount}}
+            </td>
+          </tr>
+          <!-- {{#each data.TaxBreakup}}
+          <tr>
+            <td colspan="4" class="service">{{this.TaxName}}</td>
+            <td class="total">
+              {{this.TaxableAmount}}
+            </td>
+          </tr>
+          {{/each}} -->
+          <tr>
+            <td class="tax-total" colspan="4">
+              Tax Amount
+            </td>
+            <td class="total">
+              {{data.InvoiceHdr.TaxAmount}}
+            </td>
+          </tr>
+          <tr>
+            <td class="tax-total" colspan="4">Round Off</td>
+            <td class="total">{{data.InvoiceHdr.RoundOff}}</td>
+          </tr>
+          <tr>
+            <td class="tax-total" colspan="4" class="grand total">
+              Grand Total
+            </td>
+            <td class="grand total">
+              {{ReportConfig.GeneralInfo.Currency}}{{data.InvoiceHdr.InvoiceAmount}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <!-- <footer>
+      Invoice was created on a computer and is valid without the signature and
+      seal.
+    </footer> -->
+  </body>
+</html>

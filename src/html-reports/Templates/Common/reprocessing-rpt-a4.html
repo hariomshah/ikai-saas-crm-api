@@ -1,0 +1,134 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b
+        ><br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    {{/if}}
+    <div class="text-center">
+      <h5 class="font-weight-bold">
+        {{data.ReprocessingSummary.ReportTitle}}
+        <!-- <small>({{data.RptSummary.ReportParam}})</small> -->
+      </h5>
+    </div>
+    <hr class="my-3" />
+    <div class="container-fluid d-flex justify-content-end p-3">
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" font-weight-bold p-2">
+                            Branch / Dept Code
+                        </td>
+                        <td class="p-2">
+                            {{data.ReprocessingHdr.BranchCode}} / {{data.ReprocessingHdr.DeptCode}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class=" font-weight-bold p-2">
+                            Voucher No / Date
+                        </td>
+                        <td class="p-2">
+                            {{data.ReprocessingHdr.VoucherNo}} / {{data.ReprocessingHdr.VoucherDate}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <main>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="p-2 font-weight-bold" style="width: 80px;">Sr No</th>
+            <th scope="col" class="p-2 font-weight-bold">Item Name</th>
+            <th scope="col" class="p-2 font-weight-bold">Remark</th>
+            <th scope="col" class="p-2 font-weight-bold" style="width: 111px;">R.I.Type</th>
+            <th scope="col" class="p-2 text-right" style="width: 80px;">Qty</th>
+            <th scope="col" class="p-2 text-right" style="width: 135px;">Cost Price({{ReportConfig.GeneralInfo.Currency}})</th>
+            <th scope="col" class="p-2 text-right" style="width: 135px;">Sale Price({{ReportConfig.GeneralInfo.Currency}})</th>
+            <th scope="col" class="p-2 text-right" style="width: 100px;">MRP({{ReportConfig.GeneralInfo.Currency}})</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.ReprocessingDtl}}
+          <tr>
+            <td scope="row" class="p-2 font-weight-bold">{{this.SrNo}}</td>
+            <td scope="row" class="p-2 font-weight-bold">
+              {{this.ItemName}}
+            </td>
+            <td scope="row" class="p-2 font-weight-bold">
+                {{this.Remark}}
+              </td>
+              <td scope="row" class="p-2 font-weight-bold">
+                {{this.RIType}}
+              </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.Qty}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.CostPrice}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SalePrice}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.MRP}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

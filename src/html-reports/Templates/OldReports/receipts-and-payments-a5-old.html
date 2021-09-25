@@ -1,0 +1,107 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Receipts And Payments Slip</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+
+  <body id="customer-invoice">
+    <header class="clearfix">
+      {{#if ReportConfig.Config.showReportHeader}}
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+        </div>
+      </div>
+
+      <div id="company">
+        <div style="font-size: 1.2em!important;">
+          <b>{{ReportConfig.GeneralInfo.compName}}</b>
+        </div>
+        <div>
+          {{ReportConfig.GeneralInfo.address1}},<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+        <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      <div id="divider"></div>
+      {{/if}}
+      <div id="project">
+        {{data.TranHdr.ReportTitle}}
+      </div>
+    </header>
+    <main>
+      <div id="Invoice" class="clearfix">
+        <div><span>Tran No.</span> {{data.TranHdr.TranNo}}</div>
+        <div><span>Tran Date</span> {{data.TranHdr.TranDate}}</div>
+      </div>
+      <br />
+      <div id="Invoice" style="padding-top: 10px; float: left!important;">
+        <div style="display: flex; justify-content: flex-start!important;">
+          <span>Ref No.</span> {{data.TranHdr.RefNo}}
+        </div>
+        <div style="display: flex; justify-content: flex-start!important;">
+          <span>Ref Desc: </span> {{data.TranHdr.RefDesc}}
+        </div>
+        <div style="display: flex; justify-content: flex-start!important;">
+          <span>Remark: </span> {{data.TranHdr.Remark}}
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="SrNo" style="width: 7%;">Sr No</th>
+            <th class="PayMode" style="width: 30%;">Payment Mode</th>
+            <th class="Remark" style="text-align: center;">Remark</th>
+            <th class="text-align: right;" style="text-align: right;">
+              Amount
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.TranDtl }}
+          <tr>
+            <td class="service">{{this.SrNo}}</td>
+            <td class="service" style="text-align: left; padding: 4px 60px;">
+              {{this.PayDesc}}
+            </td>
+            <td class="service" style="text-align: left; padding: 4px 72px;">
+              {{this.DtlRemark}}
+            </td>
+            <td class="service" style="text-align: right;">
+              {{this.DtlAmount}}
+            </td>
+          </tr>
+          {{/each}}
+          <tr style="border-top: solid 1px  ; width: 100%;">
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-center tax-total">
+              <b>Total Amount.</b>
+            </td>
+            <td class="total bold">
+              {{ReportConfig.GeneralInfo.Currency}} {{data.TranHdr.Amount}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="in-words">
+        <b>Amount in Words:</b> {{data.TranHdr.AmountInWords}}
+      </div>
+      <div id="divider"></div>
+    </main>
+    <!-- <footer>
+      Invoice was created on a computer and is valid without the signature and
+      seal.
+    </footer> -->
+  </body>
+</html>

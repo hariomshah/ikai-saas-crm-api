@@ -1,0 +1,286 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pdf document</title>
+    <style>
+      .amount {
+        border-top: 0px !important;
+        width: 50px;
+        text-align: right;
+        padding: 7px;
+      }
+
+      .rate {
+        border-top: 0px !important;
+        width: 40px;
+        text-align: right;
+      }
+
+      .compname {
+        /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+        font-family: "Times New Roman", Times, serif;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .qty {
+        text-align: right;
+        max-width: 60px;
+      }
+
+      th.qty {
+        padding: 6px 2px;
+      }
+
+      th.rate {
+        padding: 6px 2px;
+      }
+
+      th.amount {
+        padding: 0px 8px 0px 0px;
+      }
+
+      .desc {
+        /* max-width: 100px; */
+        text-align: left;
+      }
+
+      .order-info {
+        /* text-align: center; */
+        font-size: 12px;
+        margin-left: 8px;
+      }
+
+      .cust-info {
+        text-align: center;
+        font-size: 12px;
+      }
+      th {
+        border-top: 2px dashed black;
+        border-bottom: 2px dashed black;
+        padding: 5px;
+      }
+
+      img {
+        height: 150px;
+        width: 150px;
+      }
+
+      .noborder {
+        border-top: none !important;
+      }
+      @media print {
+        @page {
+          size: 3.1in 12in;
+          margin: 0px;
+          margin-top: 1px;
+          line-height: 0.5em;
+        }
+      }
+
+      footer {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* font-size: 22px; */
+      }
+
+      .invoice {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        /* font-family: "STIX Two Text", serif; */
+        margin-bottom: 7px;
+      }
+
+      .comp-info {
+        text-align: center;
+      }
+
+      body {
+        margin: 0;
+        width: 315px;
+        margin: auto;
+        font-size: 13px;
+      }
+      .info {
+        margin-bottom: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="invoice">
+      <div class="comp-info">
+        <!-- <img src="https://project-9220568922.s3.ap-south-1.amazonaws.com/res-logo.750bf9d3.png" /> -->
+        <div class="compname">{{ReportConfig.GeneralInfo.compName}}</div>
+        <div style="font-size: 13px;">
+          {{ReportConfig.GeneralInfo.address1}} ,<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div style="font-size: 13px;">{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div style="font-size: 13px;">
+          <a
+            style="text-decoration: none;color: inherit;"
+            class="email"
+            href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </header>
+    <main class="invoice" style="border-bottom: 2px solid !important">
+      <div class="info">
+        <div class="order-info">Customer : {{data.SaleHdr.CustName}}</div>
+        <div class="order-info">
+          <div>
+            <span>Voucher No : </span>
+            {{data.SaleHdr.VoucherNo}}
+          </div>
+        </div>
+        <div class="order-info">
+          <div>
+            <span>Voucher Date : </span>
+            {{data.SaleHdr.VoucherDate}}
+          </div>
+        </div>
+      </div>
+      <table style="margin: auto;width: 100%;">
+        <thead style="font-size: 12px;">
+          <div>
+            <tr>
+              <th class="desc" style="padding: 5px 7px;" colspan="3">
+                Description
+              </th>
+              <th class="qty" style="border-top: 2px dashed black !important;">
+                Qty
+              </th>
+              <!-- <th class="rate" style="border-top: 2px dashed black !important;">
+                Unit
+              </th> -->
+              <th class="rate" style="border-top: 2px dashed black !important;">
+                Rate
+              </th>
+              <th
+                class="amount"
+                style="border-top: 2px dashed black !important;"
+              >
+                Amount
+              </th>
+            </tr>
+          </div>
+        </thead>
+
+        <tbody style="font-size: 12px;">
+          {{#each data.SaleDtl}}
+          <tr>
+            <td class="desc" style="padding-left:8px;" colspan="3">
+              <!-- {{this.ItemName}} <br /><i> {{this.ItemDesc}}</i> -->
+              {{this.ItemNamePrint}}
+            </td>
+            <td class="qty" style="text-align: right;">{{this.SaleQty}}</td>
+            <!-- <td class="rate" style="text-align: right;">{{this.SaleUnit}}</td> -->
+            <td class="rate" style="text-align: right;">{{this.SalePrice}}</td>
+            <td
+              class="amount"
+              style="padding:0px 8px 0px 0px; text-align: right;"
+            >
+              {{this.Amount}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </main>
+    <footer class="footer">
+      <div style="display: flex;justify-content: space-between;">
+        <div
+          style="font-size: 13px;flex: 0.6;text-align: right;padding-top: 2px;"
+        >
+          Gross Total
+        </div>
+        <div
+          style="font-size: 13px;flex: 0.4;text-align:right;padding: 2px 10px 0px;"
+        >
+          {{data.SaleHdr.GrossAmount}}
+        </div>
+      </div>
+      <div style="display: flex;justify-content: space-between;">
+        <div style="font-size: 13px;flex: 0.6;text-align: right;">
+          Total Tax
+        </div>
+        <div
+          style="font-size: 13px;flex: 0.4;text-align:right;padding:2px 10px 0px 0px;"
+        >
+          {{data.SaleHdr.TaxAmount}}
+        </div>
+      </div>
+      <div style="display: flex;justify-content: space-between;">
+        <div style="font-size: 13px;flex: 0.6;text-align: right;">Discount</div>
+        <div
+          style="font-size: 13px;flex: 0.4;text-align:right;padding: 0px 10px;"
+        >
+          {{data.SaleHdr.DiscAmount}}
+        </div>
+      </div>
+      <div style="display: flex;justify-content: space-between;">
+        <div style="font-size: 13px;flex: 0.6;text-align: right;">
+          Round Off
+        </div>
+        <div
+          style="font-size: 13px;flex: 0.4;text-align:right;padding: 0px 10px;"
+        >
+          {{data.SaleHdr.RoundOff}}
+        </div>
+      </div>
+      <div style="display: flex;justify-content: space-between;">
+        <div style="font-size: 13px;flex: 0.6;text-align: right;">
+          Bill Amount
+        </div>
+        <div
+          style="font-size: 18px;flex: 0.4;text-align:right;padding: 0px 10px;
+      font-weight: 600;"
+        >
+          {{ReportConfig.GeneralInfo.Currency}}
+          {{data.SaleSummary.TotalNetAmount}}
+        </div>
+      </div>
+      <!-- <br />
+      <div style="text-align: center;font-weight: 500;font-size: 12px;">
+        * You Saved {{ReportConfig.GeneralInfo.Currency}}
+        {{data.SaleSummary.TotalSaveAmount}} on this sale *
+      </div> -->
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="cust-info">
+        {{#if data.SaleHdr.CustName}}
+        <div>
+          {{data.SaleHdr.CustName}} / {{data.SaleHdr.CustMobile}}
+        </div>
+        {{/if}} {{#if data.SaleHdr.CustDeliveryAddressId}}
+        <div>
+          {{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustDeliveryAddressId}}
+        </div>
+        <div>
+          <a
+            style="text-decoration: none;color: inherit;"
+            href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.emailCustBillingAddressId}}</a
+          >
+        </div>
+        {{/if}}
+      </div>
+      <div style="text-align: center;font-weight: 600;font-size: 12px;">
+        <br />Thank You For Visiting
+      </div>
+      <!-- 
+    <br />
+    <br />
+    <br />
+    <br /> -->
+      <!-- Invoice was created on a computer and is valid without the signature and
+    seal. -->
+    </footer>
+  </body>
+</html>

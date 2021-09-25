@@ -1,0 +1,162 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pdf document</title>
+    <style>
+        .amount {
+            max-width: 70px;
+            text-align: right;
+            padding: 8px;
+        }
+
+        .rate {
+            max-width: 50px;
+            text-align: right;
+        }
+
+        .compname {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .qty {
+            text-align: center;
+            max-width: 40px;
+        }
+
+        th.qty {
+            padding: 6px 2px;
+        }
+
+        th.rate {
+            padding: 6px 2px;
+        }
+
+        .desc {
+            /* max-width: 100px; */
+            text-align: left;
+        }
+
+        .order-info {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .cust-info {
+            text-align: center;
+        }
+
+        th {
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+            padding: 5px;
+        }
+
+        img {
+            height: 150px;
+            width: 150px;
+        }
+
+        @media print {
+            @page {
+                size: 3.1in 12in;
+                margin: 0px;
+                margin-top: 1px;
+                line-height: 0.5em;
+            }
+        }
+
+        footer {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 22px;
+        }
+
+        .invoice {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 18px;
+        }
+
+        .comp-info {
+            text-align: center;
+        }
+
+        body {
+            margin: 0;
+            width: 315px;
+            margin: auto;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="invoice">
+        <div class="comp-info">
+            <!-- <img src="https://project-9220568922.s3.ap-south-1.amazonaws.com/res-logo.750bf9d3.png" /> -->
+            <!-- <div class="compname">{{ReportConfig.GeneralInfo.compName}}</div> -->
+            <div style="font-size: 14px;">
+                {{data.KOTHdr.OrderType}} {{#if data.KOTHdr.TableNo}}- {{data.KOTHdr.TableNo}}{{/if}}<br />
+            </div>
+            <!-- <div style="font-size: 14px;">{{ReportConfig.GeneralInfo.mobile}}</div> -->
+            <!-- <div style="font-size: 14px;">
+                <a style="text-decoration: none;" class="email"
+                    href="mailto:{{ReportConfig.GeneralInfo.email}}">{{ReportConfig.GeneralInfo.email}}</a>
+            </div> -->
+        </div>
+        <div class="order-info">
+            <div>
+                <span>KOT No : </span> {{data.KOTHdr.KotId}} /
+                {{data.KOTHdr.KotDateTime}}
+            </div>
+            <div>
+                {{data.KOTHdr.KotRemark}}
+            </div>
+            <!-- <div><span>Invoice No.</span> {{data.InvoiceHdr.InvoiceNo}}</div>
+              <div><span>Invoice Date</span> {{data.InvoiceHdr.InvoiceDate}}</div> -->
+        </div>
+    </header>
+    <main class="invoice">
+        <table style="margin: auto; border-bottom: 3px solid black;width: 100%;">
+            <thead style="font-size: 14px;">
+                <div>
+                    <tr>
+                        <th class="qty">Qty</th>
+                        <th class="desc" style="padding: 6px 8px;">Description</th>
+                    </tr>
+                </div>
+            </thead>
+
+            <tbody style="font-size: 13px;">
+                {{#each data.KOTDtl}}
+                <tr>
+                    <td class="qty">{{this.Qty}}</td>
+                    {{#if_checkStatus this.ItemStatus}}
+                    <td class="desc">
+                        <span style="text-decoration: line-through;"> {{this.MenuDisplayName}} <br /><i>
+                                {{this.CookingRemark}}</i></span>
+                    </td>
+                    {{else}}
+                    <td class="desc">
+                        {{this.MenuDisplayName}}
+                        {{#if this.CookingRemark}} <br /><i>
+                            Remark:{{this.CookingRemark}}</i>{{/if}}
+                        {{#if this.MenuDisplayDesc}} <br /><i>{{this.MenuDisplayDesc}}</i>{{/if}}
+                    </td>
+                    {{/if_checkStatus}}
+
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div style="display: flex;justify-content: space-between;font-size: 14px;">
+            <div>Total Quantity</div>
+            <div style="font-weight: 600;">{{data.addInfo.TotalQty}}</div>
+        </div>
+    </main>
+</body>
+
+</html>

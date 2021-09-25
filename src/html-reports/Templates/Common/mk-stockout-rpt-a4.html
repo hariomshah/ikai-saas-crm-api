@@ -1,0 +1,203 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Out Register(Unsold)</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    {{/if}}
+    <h4 class="font-weight-bold text-center">
+      {{data.AdjustmentsSummary.ReportTitle}}
+    </h4>
+    <hr class="my-3" />
+    <main>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr class="">
+            <!-- <th scope="col" class="text-left">Sr.No.</th> -->
+            <!-- <th scope="col" class="text-left">Vch.Id</th> -->
+            <th scope="col" class="text-left">Tran Date</th>
+            <!-- <th scope="col" class="text-left">Vch.No</th> -->
+            <th scope="col" class="text-left">Box No</th>
+            <th scope="col" class="text-right">Total Wt.</th>
+            <th scope="col" class="text-left">Item Name</th>
+            <th scope="col" class="text-right">Qty.</th>
+            <th scope="col" class="text-right">Pkt.No.</th>
+            <th scope="col" class="text-right">Wt.</th>
+            <th scope="col" class="text-right">Est.Stock</th>
+            <th scope="col" class="text-right">Est. Amt.</th>
+            <th scope="col" class="text-right">Sale Price</th>
+            <th scope="col" class="text-right">Actual Amt.</th>
+            <th scope="col" class="text-right">Diff.</th>
+            <th scope="col" class="text-left">Sold Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.AdjustmentsHdr}}
+          <tr>
+            <!-- <td style="text-align: left;">
+              {{this.dtlSrNo}}
+            </td>
+          
+            <td style="text-align: left;">
+              {{this.VoucherId}}
+            </td> -->
+            <td style="text-align: left;">
+              {{this.VoucherDate}}
+            </td>
+            <!-- <td style="text-align: left;">
+              {{this.VoucherNo}}
+            </td> -->
+            <td style="text-align: left;">
+              {{this.BoxNo}}
+            </td>
+            <td style="text-align: right;">
+              {{this.TotalWeight}}
+            </td>
+          
+            <td style="text-align: left;">
+              {{this.dtlItemName}}
+            </td>
+            <td style="text-align: right;">
+              {{this.Qty}}
+            </td>
+            <td style="text-align: right;">
+              {{this.PacketNo}}
+            </td>
+            <td style="text-align: right;">
+              {{this.Weight}}
+            </td>
+            <td style="text-align: right;">
+              {{this.ES}}
+            </td>
+            <td style="text-align: right;">
+              {{this.EstimatedAmount}}
+            </td>
+            <td style="text-align: right;">
+              {{this.ActualSalePrice}}
+            </td>
+            <td style="text-align: right;">
+              {{this.ActualAmount}}
+            </td>
+            <td style="text-align: right;">
+              {{this.Diff}}
+            </td>
+            <td style="text-align: left;">
+              {{this.SoldStatus}}
+            </td>
+          </tr>
+{{/each}}
+ <!--
+              Summary
+            -->
+            <tr>
+              <td scope="row" colspan="2" class="p-2 text-right font-weight-bold">
+                <b>Total ({{ReportConfig.GeneralInfo.Currency}})</b>
+              </td>
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalTotalWeight}}</td>
+
+              
+            </td>
+              <td></td>
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalQty}}</td>
+
+                <td class="text-right font-weight-bold">
+                  </td>
+               
+                <td class="text-right font-weight-bold">
+                  {{data.ReportSummary.TotalWeight}}</td>
+  
+                
+              </td>
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalES}}</td>
+
+              
+            </td>
+              
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalEstimatedAmount}}</td>
+
+              
+            </td>
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalActualSalePrice}}</td>
+
+              
+            </td>
+                <td class="text-right font-weight-bold">
+                  {{data.ReportSummary.TotalActualAmount}}</td>
+  
+                
+              </td>
+              <td class="text-right font-weight-bold">
+                {{data.ReportSummary.TotalDiff}}</td>
+
+              
+            </td>
+          
+              <td class="text-right font-weight-bold">
+              </td>
+           
+              <!-- <td scope="row" class=" text-right font-weight-bold">
+               
+                {{data.ReportSummary.TotalDebit}}
+              </td> -->
+          </tr>
+  
+      
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="my-3" />
+    </main>
+  </body>
+</html>

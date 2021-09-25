@@ -1,0 +1,330 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Out Register Summary</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    {{/if}}
+    <p class="font-weight-bold text-center ">
+      {{data.ReportHdr.Hdr}}
+    </p>
+    <hr class="my-3" />
+    <main>
+      {{#each data.ReportGroup}}
+      <h5 class="font-weight-bold text-left ">
+        {{this.GroupName}}
+      </h5>
+
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th
+              rowspan="3"
+              colspan="1"
+              style="vertical-align : middle;text-align:center;"
+            >
+              Sr. No.
+            </th>
+            <th
+              rowspan="3"
+              colspan="1"
+              style="vertical-align : middle;text-align:left;"
+            >
+              Item Code
+            </th>
+            <th
+              rowspan="3"
+              colspan="1"
+              style="vertical-align : middle;text-align:left;"
+            >
+              Item Name
+            </th>
+            <th
+              rowspan="1"
+              colspan="4"
+              style="vertical-align : middle;text-align:center;"
+            >
+              {{../data.ReportHdr.CurrCaption}}
+            </th>
+            <th
+              rowspan="3"
+              colspan="1"
+              style="vertical-align : middle;text-align:center;"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+            </th>
+            <th
+              rowspan="1"
+              colspan="4"
+              style="vertical-align : middle;text-align:center;"
+            >
+              {{../data.ReportHdr.CurrMinus1Caption}}
+            </th>
+            <th
+              rowspan="3"
+              colspan="1"
+              style="vertical-align : middle;text-align:center;"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+            </th>
+            <th
+              rowspan="1"
+              colspan="4"
+              style="vertical-align : middle;text-align:center;"
+            >
+              {{../data.ReportHdr.CurrMinus2Caption}}
+            </th>
+          </tr>
+          <tr>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Qty
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Cost Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Margin of Cost Value (%)
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Qty
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Cost Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Margin of Cost Value (%)
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Qty
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Sale Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Cost Value
+            </th>
+            <th colspan="1" style="vertical-align : middle;text-align:center;">
+              Margin of Cost Value (%)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.DetailRows}}
+          <tr>
+            <td scope="row" class="p-2 font-weight-bold">{{this.SrNo}}</td>
+            <td scope="row" class="p-2">
+              {{this.ItemCode}}
+            </td>
+            <td scope="row" class="p-2 font-weight-bold">
+              {{this.ItemName}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleQty_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleValue_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.CostValue_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.Margin_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-center">
+              {{#if this.Margin_diff}}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-up-square-fill"
+                style="color: green;"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                />
+              </svg>
+              {{else}}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-down-square-fill"
+                style="color: red;"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z"
+                />
+              </svg>
+              {{/if}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleQty_CurrMinus1}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleValue_CurrMinus1}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.CostValue_CurrMinus1}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.Margin_CurrMinus1}}
+            </td>
+            <td>
+              {{#if this.Margin_diff1}}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-up-square-fill"
+                style="color: green;"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"
+                />
+              </svg>
+              {{else}}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-arrow-down-square-fill"
+                style="color: red;"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z"
+                />
+              </svg>
+              {{/if}}
+            </td>
+
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleQty_CurrMinus2}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.SaleValue_CurrMinus2}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.CostValue_CurrMinus2}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.Margin_CurrMinus2}}
+            </td>
+          </tr>
+
+          {{/each}}
+          <tr>
+            <td colspan="3" scope="row" class="p-2 font-weight-bold">
+              Total for ({{this.GroupName}})
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleQty_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleValue_Curr}}
+            </td>
+
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_CostValue_Curr}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_Margin_Curr}}
+            </td>
+            <td></td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleQty_CurrMinus1}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleValue_CurrMinus1}}
+            </td>
+
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_CostValue_CurrMinus1}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_Margin_CurrMinus1}}
+            </td>
+            <td></td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleQty_CurrMinus2}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_SaleValue_CurrMinus2}}
+            </td>
+
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_CostValue_CurrMinus2}}
+            </td>
+            <td scope="row" class="p-2 text-right font-weight-bold">
+              {{this.Sum_Margin_CurrMinus2}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="my-3" />
+      {{/each}}
+    </main>
+  </body>
+</html>

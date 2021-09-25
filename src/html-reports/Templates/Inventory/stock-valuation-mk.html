@@ -1,0 +1,246 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stock Out Register Summary</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+
+      html {
+        font-size: 0.65rem;
+      }
+
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    {{/if}}
+    <p class="font-weight-bold text-center ">
+      {{data.ReportHdr.Hdr}}
+    </p>
+    <hr class="my-3" />
+    <main>
+      {{#each data.ReportData}}
+      <div>
+        <table class="table table-bordered table-striped">
+          <tr>
+            <div class="d-flex">
+              <div class="flex flex-1">
+                <div class="border border-secondary d-flex w-100">
+                  <div class="p-2">
+                    <!-- <div class="font-weight-bold">Voucher Id:.</div> -->
+                    <div class="font-weight-bold">Voucher Date :.</div>
+                    <div class="font-weight-bold">Box No :.</div>
+                    <div class="font-weight-bold">No.Of Packets :.</div>
+                  </div>
+                  <div class="p-2">
+                    <!-- <div class="">{{this.VoucherId}}</div> -->
+                    <div class="font-weight-bold">
+                      {{this.VoucherDate}}
+                    </div>
+                    <div class="font-weight-bold">{{this.BoxNo}}</div>
+                    <div class="">
+                      {{this.PacketQty}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-1">
+                <div class="border border-secondary d-flex w-100">
+                  <div class="p-2">
+                    <div class="font-weight-bold">Qty:.</div>
+                    <div class="font-weight-bold">Weight :.</div>
+                    <div class="font-weight-bold">Box Weight:.</div>
+
+                    <!-- <div class="font-weight-bold">Actual Amount:.</div> -->
+                  </div>
+                  <div class="p-2">
+                    <div class="text-right">
+                      {{this.total_Qty}}
+                    </div>
+                    <div class="text-right">
+                      {{this.actual_total_Weight}}
+                    </div>
+                    <div class="text-right">{{this.TotalWeight}}</div>
+                    <!-- <div class="text-right">{{this.total_EstAmt}}</div> -->
+                    <!-- <div class="text-right">
+                      {{this.total_ActualAmt}}
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-1">
+                <div class="border border-secondary d-flex w-100">
+                  <div class="p-2">
+                    <div class="font-weight-bold">Estimated Amount:.</div>
+                    <div class="font-weight-bold">Actual Amount:.</div>
+                    <div class="font-weight-bold">Difference Amount :.</div>
+                    <!-- <div class="font-weight-bold">Box Weight:.</div> -->
+                  </div>
+                  <div class="p-2">
+                    <div class="text-right">
+                      {{this.total_EstAmt}}
+                    </div>
+                    <div class="text-right">{{this.total_ActualAmt}}</div>
+                    <div class="text-right">{{this.total_Diff}}</div>
+                    <!-- <div class="text-right">
+                      {{this.total_ActualAmt}}
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-1">
+                <div class="border border-secondary d-flex w-100">
+                  <div class="p-2">
+                    <div class="font-weight-bold ">Total Cost :.</div>
+                    <div class="font-weight-bold">Net Profit :.</div>
+                    <div class="font-weight-bold">Net Profit % :.</div>
+                  </div>
+                  <div class="p-2">
+                    <div class=" text-right">
+                      {{this.total_CostAmount}}
+                    </div>
+                    <div class="text-right">{{this.NetProfit}}</div>
+                    <div class="text-right">
+                      {{this.NetProfitPercnt}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+          <thead>
+            <tr>
+              <th style="vertical-align : middle;text-align:center;">
+                Item Name
+              </th>
+              <th style="vertical-align : middle;text-align:left;">
+                Qty
+              </th>
+              <th style="vertical-align : middle;text-align:center;">
+                Packet No
+              </th>
+              <th style="vertical-align : middle;text-align:center;">
+                Weight
+              </th>
+              <th style="vertical-align : middle;text-align:right;">
+                Estimated Price
+              </th>
+              <th style="vertical-align : middle;text-align:left;">
+                PartyName
+              </th>
+              <th style="vertical-align : middle;text-align:center;">
+                Delivery Status
+              </th>
+              <th style="vertical-align : middle;text-align:center;">
+                DOD
+              </th>
+              <th style="vertical-align : middle;text-align:right;">
+                Estimated Amount
+              </th>
+              <!-- <th style="vertical-align : middle;text-align:right;">
+                Actual Sale Amount
+              </th> -->
+              <th style="vertical-align : middle;text-align:right;">
+                Actual Amount
+              </th>
+              <th style="vertical-align : middle;text-align:right;">
+                Diff
+              </th>
+              <th style="vertical-align : middle;text-align:center;">
+                Sold Status
+              </th>
+            </tr>
+          </thead>
+
+          {{#each this.details}}
+          <tr>
+            <td scope="row" class="p-2">
+              {{this.ItemName}}
+            </td>
+            <td scope="row" class="p-2 font-weight-bold">
+              {{this.Qty}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.PacketNo}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.Weight}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.EP}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.PartyName}}
+            </td>
+            <td scope="row" class="p-2 text-center">
+              {{this.DeliveryStatus}}
+            </td>
+
+            <td scope="row" class="p-2 text-right">
+              {{this.DOD}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.EstimatedAmount}}
+            </td>
+
+            <!-- <td scope="row" class="p-2 text-right">
+              {{this.ActualSalePrice}}
+            </td> -->
+
+            <td scope="row" class="p-2 text-right">
+              {{this.ActualAmount}}
+            </td>
+
+            <td scope="row" class="p-2 text-right">
+              {{this.DiffAmount}}
+            </td>
+
+            <td scope="row" class="p-2 text-center">
+              {{this.SoldStatus}}
+            </td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      {{/each}}
+    </main>
+  </body>
+</html>

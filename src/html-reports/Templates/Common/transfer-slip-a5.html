@@ -1,0 +1,136 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Transfer Slip</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      @page {
+        size: auto;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+    <!-- <div id="divider"></div> -->
+    {{/if}}
+    <div class="text-center">
+      <h5 class="font-weight-bold">
+        {{data.TranHdr.ReportTitle}}
+      </h5>
+    </div>
+    <hr class="my-3" />
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <div>
+          <span class="font-weight-bold">Ref Desc. : </span
+          >{{data.TranHdr.RefDesc}}
+        </div>
+        <div>
+          <span class="font-weight-bold">Remark : </span>{{data.TranHdr.Remark}}
+        </div>
+      </div>
+      <div class="text-right">
+        <div>
+          <span class="font-weight-bold">Tran No. : </span
+          >{{data.TranHdr.TranNo}}
+        </div>
+        <div>
+          <span class="font-weight-bold">Tran Date : </span>
+          {{data.TranHdr.TranDate}}
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="display: flex; flex-direction: row; padding: 80px; justify-content: center;"
+    >
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 30px;">Transfer From</div>
+        <div style="font-size: 25px;">
+          {{data.TransferSummary.TransferFromDesc}}
+        </div>
+        <div style="font-weight: 600; font-size: 25px;">
+          {{ReportConfig.GeneralInfo.Currency}}
+          {{data.TransferSummary.TransferFromAmount}}
+        </div>
+      </div>
+      <div style="display: flex; align-self: center;">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="80"
+          height="40"
+          fill="currentColor"
+          class="bi bi-arrow-left-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"
+          />
+        </svg>
+      </div>
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 30px;">Transfer To</div>
+        <div style="font-size: 25px;">
+          {{data.TransferSummary.TransferToDesc}}
+        </div>
+        <div style="font-weight: 600; font-size: 25px;">
+          {{ReportConfig.GeneralInfo.Currency}}
+          {{data.TransferSummary.TransferToAmount}}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 5px;
+    width: 360px;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

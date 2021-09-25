@@ -1,0 +1,124 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cash Book Slip</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+
+  <body id="customer-invoice">
+    <header class="clearfix">
+      {{#if ReportConfig.Config.showReportHeader}}
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+        </div>
+      </div>
+      <div id="company">
+        <div style="font-size: 1.2em!important;">
+          <b>{{ReportConfig.GeneralInfo.compName}}</b>
+        </div>
+        <div>
+          {{ReportConfig.GeneralInfo.address1}},<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+        <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      <div id="divider"></div>
+      {{/if}}
+      <div id="project">
+        {{data.ReportSummary.ReportTitle}}
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th
+              class="SrNo"
+              style="width: 5%; text-align: left; padding: 4px 10px;"
+            >
+              Sr No
+            </th>
+            <th class="TranNo" style="text-align: left;width: 15%;">Tran No</th>
+            <th class="TranDate" style="text-align: left;width: 10%;">
+              Tran Date
+            </th>
+            <th class="Particulars" style="text-align: left;">Particulars</th>
+            <th class="Credit" style="text-align: right; width: 10%;">
+              Credit
+            </th>
+            <th class="Debit" style="text-align: right; width: 17%;">Debit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.ReportDtl }}
+          <tr>
+            <td class="service" style="text-align: center!important;">
+              {{this.SrNo}}
+            </td>
+            <td class="service" >
+              {{this.TranNo}}
+            </td>
+            <td class="service">
+              {{this.TranDate}}
+            </td>
+            <td class="service">
+              {{this.RefDesc}}
+              {{#if this.Remark}} <br><span style="color: rgba(0, 0, 0, 0.6);">{{this.Remark}}</span>{{else}}{{/if}}
+            </td>
+            <td class="service" style="text-align: right!important;">
+              {{this.Credit}}
+            </td>
+            <td class="service" style="text-align: right!important;">
+              {{this.Debit}}
+            </td>
+          </tr>
+          
+          {{/each}}
+          <tr style="border-top: solid 1px  ; width: 100%;">
+            <td class="text-center"></td>
+            <td class="text-right tax-total" colspan="2">
+              <b>Total Amount</b>
+            </td>
+
+            <td class="total bold" colspan="2">
+              {{ReportConfig.GeneralInfo.Currency}}
+              {{data.ReportSummary.TotalCredit}}
+            </td>
+            <td class="total bold">
+              {{ReportConfig.GeneralInfo.Currency}}
+              {{data.ReportSummary.TotalDebit}}
+            </td>
+          </tr>
+          <tr style="border-top: solid 1px  ; width: 100%;">
+            <td class="text-center"></td>
+            <td class="text-right tax-total" colspan="2">
+              <b>Closing Balance</b>
+            </td>
+            <td class="total bold" colspan="2">
+              {{ReportConfig.GeneralInfo.Currency}}
+              {{data.ReportSummary.ClosingBalanceCredit}}
+            </td>
+            <td class="total bold">
+              {{ReportConfig.GeneralInfo.Currency}}
+              {{data.ReportSummary.ClosingBalanceDebit}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <!-- <footer>
+      Invoice was created on a computer and is valid without the signature and
+      seal.
+    </footer> -->
+  </body>
+</html>

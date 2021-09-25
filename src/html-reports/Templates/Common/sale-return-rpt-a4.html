@@ -1,0 +1,155 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sales Return Report</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <style>
+    @page {
+      size: auto;
+    }
+    html {
+      font-size: 0.75rem;
+    }
+    thead th {
+      background-color: #e0edf1;
+    }
+  </style>
+  </head>
+    
+   <body id="customer-invoice">
+	<header class="container-fluid d-flex justify-content-between">
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" style="width: 120px; height:120px"/>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="h6 text-right"><b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b></div>
+
+        <div>
+          {{ReportConfig.GeneralInfo.address1}},<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+        <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      
+      
+    </header>	
+    <hr/>
+	<main>
+    <div id="divider"></div>
+    <div id="project" > 
+      <h4 style="font-weight: 700; text-align: center;">Sales Return / Credit Note</h1>
+  </div>
+  <hr/>
+      <div class="divider2 container-fluid d-flex justify-content-between">
+     <div id="Invoice">
+      <table>
+        <tbody>
+          <tr><td style="text-align: left;font-size: 13px; font-weight: 700;">Voucher No<td style="text-align: left;width: 15%;">:</td></td><td style="text-align: left;font-size: 13px">{{data.SaleReturnHdr.VoucherNo}}</td></tr>
+          <tr><td style="text-align: left;font-size: 13px;width: 100%; font-weight: 700;">Voucher Date<td style="text-align: left;width: 15%;">:</td></td><td style="text-align: left;font-size: 13px">{{data.SaleReturnHdr.VoucherDate}}</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div id="Invoice">
+        <table style=" width: 393px; margin-left: 18px;">
+           <tr><td style=" text-align: left;font-size: 13px;width: 30%;font-weight: 700;">Branch Name</td> <td style="text-align: left;width: 0%;">:</td> <td style="font-size: 13px;">{{data.SaleReturnHdr.BranchCode}}</td></tr>
+           <tr><td style=" text-align: left;font-size: 13px;width:30%;font-weight: 700;">Department Name</td> <td style="text-align: left;width: 0%;">:</td> <td style="font-size: 13px;">{{data.SaleReturnHdr.DeptCode}}</td></tr>        
+              <tr><td style=" text-align: left;font-size: 13px;width:30%;font-weight: 700;">Customer Name</td> <td style="text-align: left;width: 0%;">:</td> <td style="font-size: 13px;">{{data.SaleReturnHdr.CustName}}</td></tr>
+</table>
+        
+       </div>
+      </div>
+      
+      <table class="mt-3">
+        <thead>
+          <tr>
+            <th class="SrNo" style="width: 5%; padding-left: 2px;">Sr No</th>
+            <th class="PayMode" style="width: 9%; text-align: left;">Item Code</th>
+            <th class="PayMode" style=" width: 15%; text-align: left;">Item Name</th>
+            <th class="PayMode" style="width: 10%; text-align: right; padding: 5px 10px">Qty</th>
+            <th class="PayMode" style="width: 5%;text-align: right; padding: 5px 10px">Cost</th>
+            <th class="PayMode" style="width: 8%;text-align: right; padding: 5px 10px">Sale Price</th>
+            <th class="PayMode" style="width: 8%;text-align: right; padding: 5px 10px">MRP</th>
+            <th class="PayMode" style="width: 10%;text-align: right; padding: 5px 10px">Gross Amt.</th>
+            <th class="PayMode" style="width: 8%;text-align: right; padding: 5px 10px">Discount</th>
+            <th class="PayMode" style="width: 8%;text-align: right; padding: 5px 10px">Tax Amt.</th>
+            <th class="PayMode" style="width: 8%;text-align: right; padding: 5px 10px">Net Amt</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.SaleReturnDtl}}
+          <tr>
+            <td class="service" style="text-align: right;">{{this.SrNo}}</td>
+            <td class="service" style="text-align: left;">
+              {{this.ItemCode}}
+            </td>
+            <td class="service" style="text-align: left;">
+              {{this.ItemName}}
+            </td>
+            
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.SaleQty}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.CostPrice}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.SalePrice}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.MRP}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.GrossAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.DiscAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.TaxAmount}}
+            </td>
+            <td class="service" style="text-align: right;padding: 5px 10px">
+              {{this.NetAmount}}
+            </td>
+            
+          </tr>
+          {{/each}}
+         <tr style="border-top: solid 1px ; width: 100%;">
+            <td class="text-center tax-total" colspan="7" style="text-align: right !important;">
+              <b>Total Amount({{ReportConfig.GeneralInfo.Currency}})</b>
+            </td>
+            
+            <td class="total bold" style="text-align: right;padding: 4px 10px;">
+              {{data.SaleReturnSummary.TotalGrossAmount}}
+            </td>
+            <td class="total bold" style="text-align: right;padding: 4px 10px;">
+              {{data.SaleReturnSummary.TotalDiscountAmount}}
+            </td>
+            <td class="total bold" style="text-align: right;padding: 4px 10px;">
+              {{data.SaleReturnSummary.TotalTaxAmount}}
+            </td>
+            <td class="total bold" style="text-align: right;padding: 4px 10px;">
+              {{data.SaleReturnSummary.TotalNetAmount}}
+            </td>
+          </tr>
+        </tbody>
+		
+      </table>
+      
+    </main>
+   </body>
+</html>

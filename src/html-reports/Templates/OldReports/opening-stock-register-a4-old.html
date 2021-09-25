@@ -1,0 +1,89 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Payments and Receipts Register</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+
+  <body id="customer-invoice">
+    <header class="clearfix">
+        {{#if ReportConfig.Config.showReportHeader}}
+      <div id="logo">
+        <div>
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+        </div>
+      </div>
+      <div id="company">
+        <div style="font-size: 1.2em!important;">
+          <b>{{ReportConfig.GeneralInfo.compName}}</b>
+        </div>
+        <div>
+          {{ReportConfig.GeneralInfo.address1}},<br />
+          {{ReportConfig.GeneralInfo.address2}}
+          {{ReportConfig.GeneralInfo.Pin}},<br />
+          {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+        </div>
+        <div>{{ReportConfig.GeneralInfo.mobile}}</div>
+        <div><span>GST No.</span>{{ReportConfig.GeneralInfo.GST}}</div>
+        <div><span>CIN No.</span>{{ReportConfig.GeneralInfo.CIN_No}}</div>
+        <div>
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+      <div id="divider"></div>
+      {{/if}}
+      <div id="project">
+        {{data.OpeningStockSummary.ReportTitle}}
+      </div>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr class="saurav-test-purchase">
+            <th class="TranId" style="text-align: left;width: 5%;padding: 5px">Sr.No</th>
+            <th class="RefDesc" style="text-align: left;padding: 5px">Item Name</th>
+            <th class="TranNo" style="text-align: left;width: 14%;padding: 5px">Category</th>
+            <th class="TranNo" style="text-align: right;width: 5%;padding: 5px">Qty</th>
+            <th class="RefDesc" style="text-align: right; width: 8%;padding: 5px">Cost Rate</th>
+            <th class="RefDesc" style="text-align: right; width: 8%;padding: 5px">Sale Rate</th>
+            <th class="RefDesc" style="text-align: right; width: 7%;padding: 5px">MRP</th>
+            <th class="RefDesc" style="text-align: right; width: 8%;padding: 5px">Amount</th>
+          </tr>
+        </thead>
+        <tbody >
+          {{#each data.OpeningStockDtl}}
+          <tr >
+              <td class="service">
+                {{this.SrNo}}
+              </td>
+            <td class="service" style="padding: 5px"> 
+              {{this.ItemName}}
+              {{#if this.SubCategory}} <br><span style="color: rgba(0, 0, 0, 0.6);">({{this.SubCategory}})</span>{{/if}}
+            </td>
+            <td class="service" style="padding: 5px">
+              {{this.Category}}
+            </td>
+            <td class="service" style="padding: 5px;text-align: right">
+              {{this.Qty}}
+            </td>
+            <td class="service" style="padding: 5px;text-align: right">
+                {{this.Rate}}
+              </td>
+              <td class="service" style="padding: 5px;text-align: right">
+                {{this.SaleRate}}
+              </td>
+            <td class="service" style="padding: 5px;text-align: right">
+              {{this.MRP}}
+            </td>
+            <td class="service" style="padding: 5px;text-align: right">
+                {{this.Amount}}
+              </td>
+          </tr>
+         {{/each}} 
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

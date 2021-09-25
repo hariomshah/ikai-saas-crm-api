@@ -1,0 +1,163 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Receipts & Payments Register</title>
+    <!-- <link rel="stylesheet" href="style.css" media="all" /> -->
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+    <!-- <div id="divider"></div> -->
+    {{/if}}
+
+    <div class="text-center">
+      <h5 class="font-weight-bold">
+        {{data.ReportSummary.ReportTitle}}
+      </h5>
+    </div>
+
+    <hr class="my-3" />
+    {{#if_ViewType this.ViewType}}
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col" class="text-left" style="width:100px">SrNo.</th>
+          <th scope="col" class="text-left">Tran Id</th>
+          <th scope="col" class="text-left">Tran No</th>
+          <th scope="col" class="text-left">Tran Date</th>
+          <th scope="col" class="text-left">Ref Desc</th>
+          <th scope="col" class="text-right" style="width:150px">
+            Amount ({{ReportConfig.GeneralInfo.Currency}})
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data.ReportDtl }}
+        <tr>
+          <td class=" text-center" style=" text-align: center !important;">
+            {{this.SrNo}}
+          </td>
+          <td class=" text-left">
+            {{this.TranId}}
+          </td>
+          <td class=" text-left">
+            {{this.TranNo}}
+          </td>
+          <td class=" text-left">
+            {{this.TranDate}}
+          </td>
+
+          <td class=" text-left font-weight-bold">
+            {{this.RefDesc}} {{#if this.Remark}} <br /><span
+              style="color: rgba(0, 0, 0, 0.6);"
+              >{{this.Remark}}</span
+            >{{/if}}
+          </td>
+
+          <td class=" text-right">
+            {{this.Amount}}
+          </td>
+        </tr>
+        {{/each}}
+
+        <tr>
+          <td scope="row"></td>
+          <td scope="row"></td>
+          <td scope="row" colspan="3" class=" text-right font-weight-bold">
+            Total Amount
+          </td>
+          <td class="text-right font-weight-bold">
+            {{ReportConfig.GeneralInfo.Currency}}
+            {{data.ReportSummary.TotalAmount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {{else}}
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col" class="text-left">Sr.No</th>
+          <th scope="col" class="text-left">Tran Desc</th>
+          <th scope="col" class="text-right" style="width:150px">
+            Amount ({{ReportConfig.GeneralInfo.Currency}})
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data.GroupedData }}
+        <tr>
+          <td class=" text-left " style="width: 30px;">
+            {{this.SrNo}}
+          </td>
+          <td class=" text-left font-weight-bold">
+            {{this.TranDesc}}
+          </td>
+          <td class=" text-right">
+            {{this.Amount}}
+          </td>
+        </tr>
+        {{/each}}
+
+        <tr>
+          <td scope="row" colspan="2" class=" text-right font-weight-bold">
+            Total Amount
+          </td>
+          <td class="text-right font-weight-bold">
+            {{ReportConfig.GeneralInfo.Currency}}
+            {{data.ReportSummary.TotalAmount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {{/if_ViewType}}
+  </body>
+</html>

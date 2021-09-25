@@ -1,0 +1,88 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Restraunt Invoice</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap);
+        body {
+            font-family: 'Montserrat', sans-serif !important;
+        }
+      </style>  
+</head>
+
+ <body id="restraunt-invoice">
+    <header class="clearfix">
+      <div id="restraunt-logo" class="text-center">
+          <img src="{{ReportConfig.GeneralInfo.LogoPath}}" />
+      </div>
+      <div id="restraunt-logo" class="text-center">
+          <h3>Skyelint Restaurant </h3>
+      </div>
+     <div class="text-center">
+	 <p id="company-info" style="padding:0px 20px">
+	 Atul Traders and Dhabba,<br/>
+	 chappal Gully sei right,<br/>
+	 fir vaha sei 4 dukkan,<br/>
+	 Mumbai 400 056.</p>
+	 <p>
+	 <span id="invoice-header" class="info-title">Tel</span>: 99844 56584<br />
+	 <span id="invoice-header" class="info-title">Email</span>: atul545@gmail.com
+	 </p>
+	 </div>
+	 <div id="invoice-header" class="text-center">
+	 <span class="info-title">Invoice No </span>INV - 1001<br/>
+	  <span class="info-title">Invoice Date </span>29-26-2020
+	 </div>
+	 <table>
+		<thead>
+          <tr>
+            <th class="service">Qty</th>
+            <th class="desc">Name</th>
+            <th>PRICE</th>
+            <th class="total">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each data.InvoiceDtl}}
+          <tr>
+            <td class="qty">{{this.Qty}}</td>
+            <td class="desc">
+                {{this.ItemName}} 
+            </td>
+            <td class="rate">{{this.Rate}}</td>
+            <td class="total">{{this.Amount}}</td>
+          </tr>
+          {{/each}}
+		  <tr class="blank_row">
+			<td colspan="4"></td>
+          </tr>
+          <tr class="blank_row">
+			<td colspan="4"></td>
+		  </tr>
+		  <tr>
+		  <td  class=""></td>
+			<td colspan="2" class="bold">Gross Total</td>
+			<td  class="text-right bold border-top">{{data.InvoiceHdr.TaxExclusiveAmount}}</td>
+		  </tr>
+		  <tr>
+		  <td class=""></td>
+			<td colspan="2"  class="bold">Tax Amount</td>
+			<td  class="text-right bold">{{data.InvoiceHdr.InvoiceAmount}}</td>
+		  </tr>
+		  <tr>
+		  <td  class=""></td>
+			<td colspan="2" class="bold">Item Total</td>
+			<td  class="text-right bold border-top">{{ReportConfig.GeneralInfo.Currency}}{{data.InvoiceHdr.InvoiceAmount}}</td>
+		  </tr>
+		  <tbody>
+		 </table>
+    </main>
+    <!-- <footer>
+      Invoice was created on a computer and is valid without the signature and
+      seal.
+    </footer> -->
+  </body>
+</html>

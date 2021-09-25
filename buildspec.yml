@@ -1,0 +1,32 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo Installing Node 12...
+      - curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+      - apt-get install -y nodejs
+      - echo Installing Yarn...
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+      - apt install --no-install-recommends yarn
+      - echo installing @nestjs/cli
+      - yarn global add @nestjs/cli
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - yarn
+  build:
+    commands:
+      - echo Building...
+      - yarn build
+  post_build:
+    commands:
+      - cp -R node_modules/ dist/node_modules # nodejs needs this
+      - cp Procfile dist/Procfile # EBS needs this
+      - cp package.json dist/package.json
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: dist

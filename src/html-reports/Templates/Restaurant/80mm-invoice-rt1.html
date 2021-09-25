@@ -1,0 +1,252 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pdf document</title>
+  <style>
+    .amount {
+      max-width: 70px;
+      text-align: right;
+      padding: 8px;
+    }
+
+    .rate {
+      max-width: 50px;
+      text-align: right;
+    }
+
+    .compname {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .qty {
+      text-align: center;
+      max-width: 40px;
+    }
+
+    th.qty {
+      padding: 6px 2px;
+    }
+
+    th.rate {
+      padding: 6px 2px;
+    }
+
+    .desc {
+      /* max-width: 100px; */
+      text-align: left;
+    }
+
+    .order-info {
+      /* text-align: center; */
+      font-size: 13px;
+    }
+
+    .cust-info {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    th {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      padding: 5px;
+    }
+
+    img {
+      height: 150px;
+      width: 150px;
+    }
+
+    @media print {
+      @page {
+        size: 3.1in 12in;
+        margin: 0px;
+        margin-top: 1px;
+        line-height: 0.5em;
+      }
+    }
+
+    footer {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      /* font-size: 22px; */
+    }
+
+    .invoice {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      /* font-size: 18px; */
+    }
+
+    .comp-info {
+      text-align: center;
+    }
+
+    body {
+      margin: 0;
+      width: 315px;
+      margin: auto;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="invoice">
+    <div class="comp-info">
+      <!-- <img src="https://project-9220568922.s3.ap-south-1.amazonaws.com/res-logo.750bf9d3.png" /> -->
+      <div class="compname">{{ReportConfig.GeneralInfo.compName}}</div>
+      <div style="font-size: 14px;">
+        {{ReportConfig.GeneralInfo.address1}} ,<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}} {{ReportConfig.GeneralInfo.Country}}
+      </div>
+      <div style="font-size: 13px;">{{ReportConfig.GeneralInfo.mobile}}</div>
+      <div style="font-size: 13px;">
+        <a style="text-decoration: none;color: inherit;" class="email"
+          href="mailto:{{ReportConfig.GeneralInfo.email}}">{{ReportConfig.GeneralInfo.email}}</a>
+      </div>
+    </div>
+    <div>Cashier : {{data.InvoiceHdr.Cashier}}</div>
+    <div class="order-info">
+      <div>
+        <span>Bill No : </span> {{data.InvoiceHdr.InvoiceNo}} /
+        {{data.InvoiceHdr.InvoiceDate}}
+      </div>
+      <!-- <div><span>Invoice No.</span> {{data.InvoiceHdr.InvoiceNo}}</div>
+          <div><span>Invoice Date</span> {{data.InvoiceHdr.InvoiceDate}}</div> -->
+    </div>
+  </header>
+  <main class="invoice">
+    <table style="margin: auto; border-bottom: 3px solid black;width: 100%;">
+      <thead style="font-size: 13px;">
+        <div>
+          <tr>
+            <th class="qty">Qty</th>
+            <th class="desc" style="
+            padding: 6px 8px;">Description</th>
+            <th class="rate">Rate</th>
+            <th class="amount" style="padding: 6px 2px;">Amount</th>
+          </tr>
+        </div>
+      </thead>
+
+      <tbody style="font-size: 13px;">
+        {{#each data.InvoiceDtl}}
+        <tr>
+          <td class=" qty" style="padding:0px">{{this.Qty}}</td>
+          <td class="desc">
+            {{this.ItemName}} <br /><i> {{this.ItemDesc}}</i>
+          </td>
+          <td class="rate">{{this.Rate}}</td>
+          <td class="amount" style="padding:0px">{{this.Amount}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </main>
+  <footer class="footer">
+    <div style="display: flex;justify-content: space-between;">
+      <div style="font-size: 13px;flex: 0.6;text-align: right;padding-top: 2px;">Gross Total</div>
+      <div style="font-size: 13px;flex: 0.4;text-align:right;padding: 2px 8px 0px;">{{data.InvoiceHdr.GrossAmount}}
+      </div>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <div style="font-size: 13px;flex: 0.6;text-align: right;">Total Tax</div>
+      <div style="font-size: 13px;flex: 0.4;text-align:right;padding: 0px 8px;">{{data.InvoiceHdr.TaxAmount}}</div>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <div style="font-size: 13px;flex: 0.6;text-align: right;"> Discount</div>
+      <div style="font-size: 13px;flex: 0.4;text-align:right;padding: 0px 8px;">{{data.InvoiceHdr.DiscAmount}}</div>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <div style="font-size: 13px;flex: 0.6;text-align: right;">Round Off</div>
+      <div style="font-size: 13px;flex: 0.4;text-align:right;padding: 0px 8px;">{{data.InvoiceHdr.RoundOff}}</div>
+    </div>
+    <div style="display: flex;justify-content: space-between;">
+      <div style="font-size: 13px;flex: 0.6;text-align: right;">Bill Amount</div>
+      <div style="font-size: 12px;flex: 0.4;text-align:right;padding: 0px 8px;
+      font-weight: 600;">{{ReportConfig.GeneralInfo.Currency}}
+        {{data.InvoiceHdr.InvoiceAmount}}</div>
+    </div>
+    <!-- <div>
+      <table style="margin: auto;">
+        <tbody>
+          <tr>
+            <td class="qty"></td>
+            <td class="desc" style="text-align: right;">
+              Gross Total
+            </td>
+            <td class="rate"></td>
+            <td class="amount">{{data.InvoiceHdr.GrossAmount}}</td>
+          </tr>
+          <tr>
+            <td class="qty"></td>
+            <td class="desc" style="text-align: right;">
+              Total Tax
+            </td>
+            <td class="rate"></td>
+            <td class="amount">{{data.InvoiceHdr.TaxAmount}}</td>
+          </tr>
+          <tr>
+            <td class="qty"></td>
+            <td class="desc" style="text-align: right;">
+              Discount
+            </td>
+            <td class="rate"></td>
+            <td class="amount">{{data.InvoiceHdr.DiscAmount}}</td>
+          </tr>
+          <tr>
+            <td class="qty"></td>
+            <td class="desc" style="text-align: right;">
+              Round Off
+            </td>
+            <td class="rate"></td>
+            <td class="amount">{{data.InvoiceHdr.RoundOff}}</td>
+          </tr>
+          <tr>
+            <td class="qty"></td>
+            <td class="desc" style="text-align: right;">
+              Bill Amount
+            </td>
+            <td class="rate"></td>
+            <td class="amount" style="font-size: 24px; font-weight: bold;">
+              {{ReportConfig.GeneralInfo.Currency}} {{data.InvoiceHdr.InvoiceAmount}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="cust-info">
+      {{#if data.InvoiceHdr.Name}}
+      <div>
+        {{data.InvoiceHdr.Name}} / {{data.InvoiceHdr.CustMobile}}
+      </div>
+      {{/if}} {{#if data.InvoiceHdr.add1}}
+      <div>
+        {{data.InvoiceHdr.add1}},{{data.InvoiceHdr.add3}},{{data.InvoiceHdr.add2}},{{data.InvoiceHdr.PinCode}}
+      </div>
+      <div>
+        <a style="text-decoration: none;color: inherit;"
+          href="mailto:{{data.InvoiceHdr.email}}">{{data.InvoiceHdr.email}}</a>
+      </div>
+      {{/if}}
+    </div>
+    <div style="text-align: center;font-weight: 600;font-size: 12px;"><br />Thank You For Visiting</div>
+    <!-- 
+    <br />
+    <br />
+    <br />
+    <br /> -->
+    <!-- Invoice was created on a computer and is valid without the signature and
+    seal. -->
+  </footer>
+</body>
+
+</html>

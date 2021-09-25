@@ -1,0 +1,409 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #5d6975;
+  text-decoration: underline;
+}
+
+body#customer-invoice {
+  position: relative;
+  /* width: 21cm;   */
+  /* height: 29.7cm; commented by atul for showing blank page in pdf */
+  margin: 0 auto;
+  color: #001028;
+  background: #ffffff;
+  font-family: Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  font-family: Arial;
+  padding: 20px;
+}
+
+#customer-invoice header {
+  padding: 10px 0 0 0;/*Add by saurav*/
+  /* margin-bottom: 30px; */
+}
+
+#customer-invoice #logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#customer-invoice #logo div {
+  float: left;
+}
+#customer-invoice #logo img {
+  width: auto;
+  height: 90px;
+}
+
+#customer-invoice #divider {
+  border-top: 1px solid #5d6975;
+  width: 100%;
+  /* border-bottom: 1px solid #5d6975;
+  color: #5d6975;
+  font-size: 2.4em;
+  line-height: 1.4em;
+  font-weight: normal;
+  text-align: center; */
+  margin: 0 0 20px 0;
+  /* background: url(dimension.png); */
+}
+
+#customer-invoice #logo {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#customer-invoice #project {
+  display:flex;
+  justify-content: center;
+  font-size: large;
+  width:100%;
+  margin-bottom: 20px; /*Added by Saurav*/
+}
+
+#customer-invoice #Invoice {
+  float: right;
+  text-align: right;
+  width: 300px;
+}
+
+#customer-invoice #Invoice span {
+  color: #5d6975;
+  text-align: left;
+  /* width: 52px; */
+  margin-right: 10px;
+  display: block;
+  /* font-size: 0.8em; */
+}
+#customer-invoice #Invoice div {
+  display: flex;
+  justify-content: flex-end;
+}
+#customer-invoice #project span {
+  color: #5d6975;
+  text-align: right;
+  width: 52px;
+  margin-right: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+#customer-invoice #company {
+  float: right;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+#customer-invoice #project div,
+#customer-invoice #company div,
+#customer-invoice #logo div,
+#customer-invoice #logo div {
+  white-space: nowrap;
+}
+
+#customer-invoice table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  table-layout: fixed;
+}
+
+#customer-invoice table tr:nth-child(2n-1) td {
+  background: #f5f5f5;
+}
+
+#customer-invoice table th,
+#customer-invoice table td {
+  text-align: center;
+}
+
+#customer-invoice table th {
+  padding: 5px 20px;
+  color: #5d6975;
+  border-bottom: 1px solid #c1ced9;
+  white-space: nowrap;
+  /* font-weight: normal; */ /*previous*/
+  font-size: 0.9em; /*Added by atul*/
+}
+
+#customer-invoice table .service,
+#customer-invoice table .desc {
+  text-align: left;
+  font-size: 0.8em;
+}
+
+#customer-invoice table .service-head {
+  text-align: left;
+  font-size: 0.8em;
+  width: 30% !important;
+}
+
+#customer-invoice table td {
+  padding: 4px 20px;
+  /* font-size: 0.9em; Add by atul */
+}
+
+#customer-invoice table .tax-total,
+#customer-invoice table .sub-total {
+  text-align: right;
+  font-weight: 800;/*Add by saurav*/
+}
+
+#customer-invoice table td.service,
+#customer-invoice table td.desc {
+  vertical-align: top;
+}
+
+#customer-invoice table td.unit,
+#customer-invoice table td.qty,
+#customer-invoice table td.amount,
+#customer-invoice table td.total {
+  /* font-size: 1em; */
+  font-size: 0.8em;/*Add by atul*/
+  font-weight: 800; /*Add by saurav*/
+}
+
+#customer-invoice table td.grand {
+  border-top: 1px solid;
+}
+
+#customer-invoice #notices .notice {
+  color: #5d6975;
+  font-size: 15px;
+  padding: 4px;
+}
+
+#customer-invoice #notices .note {
+  /* color: #5d6975; */
+  font-size: 13px;
+  margin-left: 5px;
+  padding: 7px 6px;
+} /*Added by atul*/
+
+#customer-invoice footer {
+  color: #5d6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0px;
+  border-top: 1px solid #c1ced9;
+  padding: 8px 0;
+  text-align: center;
+}
+
+#customer-invoice .tax-total,
+#customer-invoice .sub-total,
+#customer-invoice .total,
+#customer-invoice .grand .total,
+#customer-invoice .account-detail {
+  background: #ffffff !important;
+  text-align: right;
+  font-size: 0.8em; /*Added by atul*/
+  font-weight: 800; /*Added by saurav*/
+}
+#customer-invoice .account-label {
+  font-size: 0.8em;
+  color: #5d6975;
+}
+
+#customer-invoice .total.gross {
+  border-top: 1px solid #5d6975 !important;
+  font-weight: 800; /*Added by saurav*/
+}
+#customer-invoice .gross.sub-total {
+  border-top: 1px solid #5d6975 !important;
+  font-weight: 800; /*Added by saurav*/
+  font-size: 0.8em;
+}
+#customer-invoice .in-words {
+  /* color: #5d6975; */
+  font-size: 15px;
+} /*Added by atul*/
+
+/* .print:last-child {
+  page-break-after: auto;
+} */
+#customer-invoice .account-table {
+  border: 1px solid #5d6975;
+  width: 0%;
+  margin-top: 15px;
+  vertical-align: middle;
+}
+
+html,
+body {
+  height: auto;
+}
+
+/* restrant invoice */
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap);
+body#restraunt-invoice {
+  position: relative;
+  margin: 0 auto;
+  color: #001028;
+  background: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+}
+
+#restraunt-invoice #restraunt-logo {
+  margin-bottom: 0px;
+}
+#restraunt-invoice h3 {
+  margin: 0px;
+}
+
+#restraunt-invoice #restraunt-logo img {
+  width: 120px;
+}
+
+#restraunt-invoice .text-center {
+  text-align: center;
+}
+
+#restraunt-invoice .info-title {
+  font-size: 13px !important;
+  font-weight: 600;
+}
+#invoice-header {
+  font-size: 12px;
+}
+
+#restraunt-invoice table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-bottom: 1px solid #c1ced9;
+}
+#restraunt-invoice table td {
+  text-align: center;
+}
+
+#restraunt-invoice table td.total {
+  font-weight: 600;
+}
+#restraunt-invoice table td.total,
+#restraunt-invoice table th.total {
+  text-align: right;
+}
+#restraunt-invoice table td,
+table th {
+  padding: 8px 20px;
+}
+
+#restraunt-invoice table th {
+  border-top: 1px solid #c1ced9;
+  border-bottom: 1px solid #c1ced9;
+}
+#restraunt-invoice .blank_row {
+  height: 10px !important; /* overwrites any other rules */
+  background-color: #ffffff;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+#restraunt-invoice .border-top {
+  border-top: 1px solid #c1ced9;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+body#payment-receipt {
+  position: relative;
+  /* width: 21cm;   */
+  /* height: 29.7cm; commented by atul for showing blank page in pdf */
+  margin: 0 auto;
+  color: #001028;
+  background: #f7f7f7;
+  /* font-family: "Montserrat", sans-serif !important; */
+  font-size: 12px;
+  font-family: Arial;
+  padding: 0px;
+  text-align: center;
+}
+#payment-receipt .logo-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0px;
+}
+
+#payment-receipt .logo-head.text-head-style {
+  color: #fff;
+  background: #32cd32;
+  font-size: 16px;
+}
+
+#payment-receipt .logo-head .image-logo {
+  height: 55px;
+  /* background-image: url(./logo.png); */
+}
+
+#payment-receipt .user-data {
+  font-size: 16px;
+  color: #000;
+  font-weight: 600;
+}
+
+#payment-receipt .main-body {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 5px;
+}
+
+#payment-receipt .order-schedule {
+  color: rgba(0, 0, 0, 0.6);
+  padding: 7px 0px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#payment-receipt .detail-footer {
+  font-size: 12px;
+  color: #000;
+  padding: 15px 0px 0px;
+  font-weight: 600;
+}
+
+a.email{
+  color: #000;
+}
+
+.text-center{
+  text-align: center !important;
+}
+
+.remark-color{
+  color:rgba(0,0,0,0.6);font-size:0.8em;
+}
+
+.atul-test-purchase{
+  border-bottom: 1px dashed #c1ced9!important;
+}
+
+.saurav-test-purchase{
+  border-top: 1px solid #c1ced9 !important;
+}
+
+.divider2{
+  border-bottom:1px solid #c1ced9 !important;
+  width:100%;display: flex;
+  justify-content: space-between;
+}

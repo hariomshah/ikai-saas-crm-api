@@ -1,0 +1,193 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sales Return Register</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="100px"
+          width="100px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr />
+    {{/if}}
+    <h4 class="font-weight-bold text-center">
+      {{data.ReportHdr.ReportTitle}}
+    </h4>
+    <hr class="my-3" />
+
+    <main>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-left">Vch.Id</th>
+            <th scope="col" class="text-left">Vch.No</th>
+            <th scope="col" class="text-left">Vch.Date</th>
+            <th scope="col" class="text-left">Customer Name</th>
+            <th scope="col" class="text-right">Gross Amt.</th>
+            <th scope="col" class="text-right">Discount</th>
+            <th scope="col" class="text-right">Tax Amt.</th>
+            <th scope="col" class="text-right">Misc Amt.</th>
+            <th scope="col" class="text-right">Net Amt.</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.SalesReturnHdr}}
+          <tr>
+            <td style="text-align: left;">
+              {{this.VoucherId}}
+            </td>
+            <td style="text-align: left;">
+              {{this.VoucherNo}}
+            </td>
+
+            <td style="text-align: left;">
+              {{this.VoucherDate}}
+            </td>
+            <td style="text-align: left;">
+              {{this.CustName}}
+            </td>
+
+            <td style="text-align: right;">
+              {{this.GrossAmount}}
+            </td>
+            <td style="text-align: right;">
+              {{this.Discount}}
+            </td>
+            <td style="text-align: right;">
+              {{this.TaxAmount}}
+            </td>
+            <td style="text-align:right">
+              {{this.MiscAmount}}
+            </td>
+            <td class="text-right font-weight-bold">
+              {{this.NetAmount}}
+            </td>
+          </tr>
+
+          {{#if this.SalesReturnDtl}}
+          <tr>
+            <td colspan="9">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr class="">
+                    <th scope="col" class="text-left">Sr.No</th>
+                    <th scope="col" class="text-left">Item Name</th>
+                    <th scope="col" class="text-left">Qty</th>
+                    <th scope="col" class="text-right">Cost Price</th>
+                    <th scope="col" class="text-right">Sale Price</th>
+                    <th scope="col" class="text-right">MRP</th>
+                    <th scope="col" class="text-right">Disc Amt.</th>
+                    <th scope="col" class="text-right">Tax Amt.</th>
+                    <th scope="col" class="text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each this.SalesReturnDtl}}
+                  <tr>
+                    <td style="text-align: left;">
+                      {{this.SrNo}}
+                    </td>
+                    <td style="text-align: left;">
+                      {{this.ItemName}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{this.CostPrice}}
+                    </td>
+
+                    <td style="text-align: right;">
+                      {{this.SalePrice}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{this.LandingSalePrice}}
+                    </td>
+
+                    <td style="text-align: right;">
+                      {{this.MRP}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{this.DiscAmount}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{this.TaxAmount}}
+                    </td>
+                    <td style="text-align: right;">
+                      {{this.Amount}}
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              {{/if}} {{/each}}
+
+              <tr>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td
+                  scope="row"
+                  colspan="2"
+                  class=" text-right font-weight-bold"
+                >
+                  Total Amount : ({{ReportConfig.GeneralInfo.Currency}})
+                </td>
+                <td class="text-right font-weight-bold">
+                  {{data.SalesReturnSummary.TotalGrossAmount}}
+                </td>
+                <td class="text-right font-weight-bold">
+                  {{data.SalesReturnSummary.TotalDiscountAmount}}
+                </td>
+                <td class="text-right font-weight-bold">
+                  {{data.SalesReturnSummary.TotalTaxAmount}}
+                </td>
+                <td class="text-right font-weight-bold">
+                  {{data.SalesReturnSummary.TotalMiscAmount}}
+                </td>
+                <td class="text-right font-weight-bold">
+                  {{data.SalesReturnSummary.TotalNetAmount}}
+                </td>
+              </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sales Order Report</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    <!-- {{ReportConfig.GeneralInfo.compName}} -->
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b
+        ><br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    <h4 class="font-weight-bold text-center">
+        Sales Order Receipt
+    </h4>
+    <hr class="my-3"/>
+  
+    <div class="container-fluid d-flex justify-content-between">
+       
+            <div>
+                <div><span class="font-weight-bold">Voucher No : </span>{{data.SaleOrderHdr.VoucherNo}}</div> 
+                <div><span class="font-weight-bold">Voucher Date : </span> {{data.SaleOrderHdr.VoucherDate}}</div>
+                <div><span class="font-weight-bold">Customer Name  : </span> {{data.SaleOrderHdr.CustName}}</div>
+              </div>
+
+              <div class="text-right" >
+                  <div><span class="font-weight-bold">Branch Name : </span>{{data.SaleOrderHdr.BranchCode}} </div>
+                  <div> <span class="font-weight-bold">Department Name : </span> {{data.SaleOrderHdr.DeptCode}}</div>
+              </div>
+    
+    </div>
+
+    <main>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr class="">
+              <th scope="col" class="text-center">Sr No</th>
+              <th scope="col" class="text-center">Item Name</th>
+              <th scope="col" class="text-right">Qty</th>
+              <th scope="col" class="text-right">Sale Price ({{ReportConfig.GeneralInfo.Currency}})</th>
+              <th scope="col" class="text-right">MRP ({{ReportConfig.GeneralInfo.Currency}}) </th>
+              <th scope="col" class="text-right">Gross Amt. ({{ReportConfig.GeneralInfo.Currency}}) </th>
+              <th scope="col" class="text-right">Discount ({{ReportConfig.GeneralInfo.Currency}}) </th>
+              <th scope="col" class="text-right">Tax Amt. ({{ReportConfig.GeneralInfo.Currency}}) </th>
+              <th scope="col" class="text-right">Net Amt ({{ReportConfig.GeneralInfo.Currency}}) </th>
+            </tr>
+          </thead>
+    <tbody>
+        {{#each data.SaleOrderDtl}}
+        <tr>
+          <td class="service" style="text-align: left;">{{this.SrNo}}</td>
+          <td class="service" style="text-align: left;">
+            {{this.ItemName}}
+          </td>
+          
+          <td style="text-align: right;">
+            {{this.SaleQty}}
+          </td>
+          <td style="text-align: right;">
+            {{this.SalePrice}}
+          </td>
+          <td style="text-align: right;">
+            {{this.MRP}}
+          </td>
+          <td style="text-align: right;">
+            {{this.GrossAmount}}
+          </td>
+          <td style="text-align: right;">
+            {{this.DiscAmount}}
+          </td>
+          <td style="text-align: right;">
+            {{this.TaxAmount}}
+          </td>
+          <td style="text-align: right;">
+            {{this.NetAmount}}
+          </td>
+          
+        </tr>
+        {{/each}}
+       <tr style="border-top: solid 1px ; width: 100%;">
+          <td class="text-" colspan="5" style="text-align: right !important;">
+            <b>Total Amount ({{ReportConfig.GeneralInfo.Currency}})</b>
+          </td>
+          
+          <td class="font-weight-bold" style="text-align: right;">
+            {{data.SaleOrderSummary.TotalGrossAmount}}
+          </td>
+          <td class="font-weight-bold" style="text-align: right;">
+            {{data.SaleOrderSummary.TotalDiscountAmount}}
+          </td>
+          <td class="font-weight-bold" style="text-align: right;">
+            {{data.SaleOrderSummary.TotalTaxAmount}}
+          </td>
+          <td class="font-weight-bold" style="text-align: right;">
+            {{data.SaleOrderSummary.TotalNetAmount}}
+          </td>
+        </tr>
+      </tbody>
+      
+   
+    </main>
+  </body>
+</html>

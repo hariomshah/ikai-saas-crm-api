@@ -1,0 +1,171 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pdf document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <style>
+      @page {
+        size: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- {{ReportConfig.GeneralInfo.compName}} -->
+
+    <div class=" justify-content-between d-flex " style="width: 45%;">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="90px"
+          width="90px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b
+        ><br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- <hr class="my-3" />
+  <h4 class="font-weight-bold text-center">
+      Sales Report
+  </h4> -->
+    <hr class="my-3" />
+    <div class=" d-flex">
+      <div id="Invoice">
+        <div>
+          <span class="font-weight-bold">Customer : </span
+          >{{data.SaleHdr.CustName}}
+        </div>
+        <div>
+          <span class="font-weight-bold">Voucher No : </span>
+          {{data.SaleHdr.VoucherNo}}/{{data.SaleHdr.VoucherDate}}
+        </div>
+      </div>
+
+      <!--  
+      <div id="Invoice" class="text-right" >
+          <div><span class="font-weight-bold">Branch Name : </span>{{data.SaleHdr.BranchCode}} </div>
+          <div> <span class="font-weight-bold">Department Name : </span> {{data.SaleHdr.DeptCode}}</div>
+          <div><span class="font-weight-bold">Customer Name  : </span> {{data.SaleHdr.CustName}}</div>
+      </div> -->
+    </div>
+
+    <main>
+      <table class="table table-bordered table-striped" style="width: 45%;">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Qty</th>
+            <th scope="col" class="text-center">
+              Rate ({{ReportConfig.GeneralInfo.Currency}})
+            </th>
+            <th scope="col" class="text-center">
+              Amount ({{ReportConfig.GeneralInfo.Currency}})
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.SaleDtl}}
+          <tr>
+            <td class="service" style="text-align: left;">
+              {{this.ItemName}}<i> {{this.ItemDesc}}</i>
+            </td>
+            <td style="text-align: right;">
+              {{this.SaleQty}}
+            </td>
+            <td style="text-align: right;">
+              {{this.MRP}}
+            </td>
+            <td style="text-align: right;">
+              {{this.Amount}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </main>
+
+    <div class="container text-center">
+      <div class=" d-flex justify-content-center w-50">
+        <div class="font-weight-bold">
+          Total ({{ReportConfig.GeneralInfo.Currency}}) :
+          {{data.SaleHdr.GrossAmount}}
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center w-50 ">
+        <div class="font-weight-bold">
+          Total Tax ({{ReportConfig.GeneralInfo.Currency}}) :
+          {{data.SaleHdr.TaxAmount}}
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center w-50">
+        <div class="font-weight-bold">
+          Discount ({{ReportConfig.GeneralInfo.Currency}}) :
+          {{data.SaleHdr.DiscAmount}}
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center w-50">
+        <div class="font-weight-bold">
+          Round Off ({{ReportConfig.GeneralInfo.Currency}}) :
+          {{data.SaleHdr.RoundOff}}
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center w-50 ">
+        <div class="font-weight-bold">
+          Bill Amount ({{ReportConfig.GeneralInfo.Currency}}) :
+          {{data.SaleSummary.TotalNetAmount}}
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="cust-info">
+      {{#if data.SaleHdr.CustName}}
+      <div>
+        {{data.SaleHdr.CustName}} / {{data.SaleHdr.CustMobile}}
+      </div>
+      {{/if}} {{#if data.SaleHdr.CustDeliveryAddressId}}
+      <div>
+        {{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustBillingAddressId}},{{data.SaleHdr.CustDeliveryAddressId}}
+      </div>
+      <div>
+        <a
+          style="text-decoration: none;color: inherit;"
+          href="mailto:{{ReportConfig.GeneralInfo.email}}"
+          >{{ReportConfig.GeneralInfo.emailCustBillingAddressId}}</a
+        >
+      </div>
+      {{/if}}
+    </div>
+    <div
+      style=" font-size: 12px ; text-align:center "
+      class=" font-weight-bold w-50"
+    >
+      <br />Thank You For Visiting
+    </div>
+  </body>
+</html>

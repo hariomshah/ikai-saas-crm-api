@@ -1,0 +1,132 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cash Book Slip</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+    <!-- <div id="divider"></div> -->
+    {{/if}}
+    <div class="text-center">
+      <h5 class="font-weight-bold">
+        {{data.TranHdr.ReportTitle}}
+      </h5>
+    </div>
+    <hr class="my-3" />
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <div> <span class="font-weight-bold">Ref Desc. : </span>{{data.TranHdr.RefDesc}}</div>
+          <div> <span class="font-weight-bold">Remark  : </span>{{data.TranHdr.Remark}}</div>
+      </div>
+      <div class="text-right" >
+        <div>
+          <span class="font-weight-bold">Tran No. : </span
+          >{{data.TranHdr.TranNo}}
+        </div>
+        <div>
+          <span class="font-weight-bold">Tran Date : </span>
+          {{data.TranHdr.TranDate}}
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center"style="width:100px">Sr No</th>
+          <th scope="col" class="text-left">Payment Mode</th>
+          <th scope="col" class="text-left">Remark</th>
+          <th scope="col" class="text-right" style="width:150px">
+            Amount ({{ReportConfig.GeneralInfo.Currency}})
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each data.TranDtl }}
+        <tr>
+          <td class=" text-center" style=" text-align: center !important;">
+            {{this.SrNo}}
+          </td>
+          <td class=" text-left font-weight-bold">
+            {{this.PayDesc}}
+          </td>
+          <td class=" text-left">
+            {{this.DtlRemark}}
+          </td>
+          <td class=" text-right">
+            {{this.DtlAmount}}
+          </td>
+        </tr>
+        {{/each}}
+
+        <!--
+              Summary
+            -->
+        <tr>
+          <td scope="row" colspan="3" class=" text-right font-weight-bold">
+            Total Amount ({{ReportConfig.GeneralInfo.Currency}})
+          </td>
+          <td class="text-right font-weight-bold">
+            {{data.TranHdr.Amount}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="in-words">
+      <b>Amount in Words : </b> {{data.TranHdr.AmountInWords}}
+      <hr />
+    </div>
+  </body>
+</html>

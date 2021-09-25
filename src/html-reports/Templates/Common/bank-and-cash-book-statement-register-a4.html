@@ -1,0 +1,167 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bank And Cash Statement Register</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      @page {
+        size: auto;
+      }
+      html {
+        font-size: 0.75rem;
+      }
+      thead th {
+        background-color: #e0edf1;
+      }
+    </style>
+  </head>
+
+  <body class="p-2">
+    {{#if ReportConfig.Config.showReportHeader}}
+
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <img
+          src="{{ReportConfig.GeneralInfo.LogoPath}}"
+          height="120px"
+          width="120px"
+        />
+      </div>
+      <div class="h6 text-right">
+        <b class="h4 font-italic">{{ReportConfig.GeneralInfo.compName}}</b>
+        <br />
+        {{ReportConfig.GeneralInfo.address1}},<br />
+        {{ReportConfig.GeneralInfo.address2}}
+        {{ReportConfig.GeneralInfo.Pin}},<br />
+        {{ReportConfig.GeneralInfo.City}}
+        {{ReportConfig.GeneralInfo.Country}}<br />
+        {{ReportConfig.GeneralInfo.mobile}}<br />
+        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+        <div class="blockquote-footer">
+          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
+            >{{ReportConfig.GeneralInfo.email}}</a
+          >
+        </div>
+      </div>
+    </div>
+    <hr class="my-3" />
+    <!-- <div id="divider"></div> -->
+    {{/if}}
+    <div class="text-center">
+      <h5 class="font-weight-bold">
+        {{data.BankWalletGatewayBookSummary.ReportTitle}}
+      </h5>
+    </div>
+    <hr class="my-3" />
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+          <div><span class="font-weight-bold">Mode of Payment : </span>{{data.BankWalletGatewayBookHdr.PayDesc}}</div> 
+          <!-- <div><span class="font-weight-bold">Opening Balance : </span>{{ReportConfig.GeneralInfo.Currency}} {{data.BankWalletGatewayBookHdr.OpeningBalance}}</div>
+          <div><span class="font-weight-bold">As of Balance : </span>{{data.BankWalletGatewayBookHdr.AsOfBalance}}</div> -->
+         
+      <div>
+        {{#if data.BankWalletGatewayBookHdr.AccountNo}}<div><span class="font-weight-bold">Account No. : </span>{{data.BankWalletGatewayBookHdr.AccountNo}} </div> {{/if}}
+        {{#if data.BankWalletGatewayBookHdr.Beneficiary}}<div> <span class="font-weight-bold">Beneficiary : </span>{{data.BankWalletGatewayBookHdr.Beneficiary}}</div>{{/if}}
+        {{#if data.BankWalletGatewayBookHdr.IFSCCode}}  <div> <span class="font-weight-bold">IFSC Code : </span>{{data.BankWalletGatewayBookHdr.IFSCCode}}</div>{{/if}}
+        {{#if data.BankWalletGatewayBookHdr.CompanyName}}<div><span class="font-weight-bold">Company Name. : </span>{{data.BankWalletGatewayBookHdr.CompanyName}} </div> {{/if}}
+        <!-- {{#if data.BankWalletGatewayBookHdr.Beneficiary}}<div> <span class="font-weight-bold">Beneficiary : </span>{{data.BankWalletGatewayBookHdr.Beneficiary}}</div>{{/if}}
+        {{#if data.BankWalletGatewayBookHdr.IFSCCode}}  <div> <span class="font-weight-bold">IFSC Code : </span>{{data.BankWalletGatewayBookHdr.IFSCCode}}</div>{{/if}} -->
+      </div>
+     
+        </div>
+      
+    </div>
+    </div>
+    <main>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">#</th>
+            <th scope="col" class="text-left"> Tran No</th>
+            <th scope="col" class="text-left"> Tran Type</th>
+            <th scope="col" class="text-left">Tran Date</th>
+            <th scope="col" class="text-left">Particulars</th>
+            <th scope="col" class="text-left">Original Source</th>
+            <th scope="col" class="text-right">Credit ({{ReportConfig.GeneralInfo.Currency}})</th>
+            <th scope="col" class="text-right">Debit ({{ReportConfig.GeneralInfo.Currency}})</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each data.BankWalletGatewayBookDtl}}
+          <tr>
+            <td class=" text-center" style=" text-align: center !important;">
+              {{this.SrNo}}
+            </td>
+            <td class=" text-left font-weight-bold">
+              {{this.TranNo}}
+            </td>
+            <td class=" text-left font-weight-bold">
+              {{this.TranTypeDesc}}
+            </td>
+            <td class=" text-left">
+              {{this.TranDate}}
+            </td>
+            <td class=" text-left">
+              {{this.RefDesc}} {{#if this.Remark}} <br /><span
+                style="color: rgba(0, 0, 0, 0.6);"
+                >{{this.Remark}}</span
+              >{{/if}}
+            </td>
+            <td class="text-left">
+                {{this.OriginalSource}}
+              </td>
+            <td class="text-right">
+              {{this.Credit}}
+            </td>
+            <td class=" text-right">
+              {{this.Debit}}
+            </td>
+          </tr>
+          {{/each}}
+
+          <!--
+              Summary
+            -->
+          <tr>
+            <td scope="row" colspan="6" class="p-2 text-right font-weight-bold">
+              <b>Total Amount ({{ReportConfig.GeneralInfo.Currency}})</b>
+            </td>
+              <td class="text-right font-weight-bold">
+                {{data.BankWalletGatewayBookSummary.TotalCredit}}</td>
+
+              
+            </td>
+            <td scope="row" class=" text-right font-weight-bold">
+             
+              {{data.BankWalletGatewayBookSummary.TotalDebit}}
+            </td>
+        </tr>
+
+          <tr>
+            <td scope="row" colspan="6" class=" text-right font-weight-bold">
+              <b>Closing Balance ({{ReportConfig.GeneralInfo.Currency}})</b> 
+            </td>
+              <td class="text-right font-weight-bold">
+                {{data.BankWalletGatewayBookSummary.ClosingBalanceCredit}}</td>
+             
+              </td>
+            <td scope="row" class=" text-right font-weight-bold">
+             
+              {{data.BankWalletGatewayBookSummary.ClosingBalanceDebit}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="my-3" />
+    </main>
+  </body>
+</html>
