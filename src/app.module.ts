@@ -94,6 +94,8 @@ import { AppLayoutUsersService } from "./app-layout-users/app-layout-users.servi
 import { AppLayoutUsersController } from "./app-layout-users/app-layout-users.controller";
 import { AppLayoutUsersModule } from "./app-layout-users/app-layout-users.module";
 import { AppRouteModule } from "./app-route/app-route.module";
+import { LeadsManagementModule } from './leads-management/leads-management.module';
+
 
 @Module({
   imports: [
@@ -191,6 +193,8 @@ import { AppRouteModule } from "./app-route/app-route.module";
     AppLayoutModule,
     AppLayoutUsersModule,
     AppRouteModule,
+    LeadsManagementModule,
+    
   ],
   providers: [
     NotifyEmailService,
@@ -207,6 +211,7 @@ import { AppRouteModule } from "./app-route/app-route.module";
     SelfOrderController,
     ConfigTableQrController,
     AppLayoutUsersController,
+    
   ],
 })
 export class AppModule {}

@@ -9,16 +9,14 @@ import { getEnabledCategories } from "trace_events";
 export class AppMainService {
   private logger = new Logger("AppMainService");
 
-  constructor(private readonly conn: Connection) { }
+  constructor(private readonly conn: Connection) {}
 
   async getUserMenu(pCompCode, pUserId): Promise<any> {
-    console.log(pUserId, pCompCode, "getUserMenu");
     try {
       let query = `CALL spGetUserMenu (?,?)`;
-      const data = await this.conn.query(query, [
-        pCompCode,
-        pUserId === "null" ? null : pUserId,
-      ]).catch(err=>console.log(err));
+      const data = await this.conn
+        .query(query, [pCompCode, pUserId === "null" ? null : pUserId])
+        .catch((err) => console.log(err));
       return { message: "successful", data: data[0] };
     } catch (error) {
       this.logger.error(error);
@@ -187,7 +185,11 @@ export class AppMainService {
     }
   }
 
-  async getUserPatientProfiles(CompCode: any, userType: any, userId: any): Promise<any> {
+  async getUserPatientProfiles(
+    CompCode: any,
+    userType: any,
+    userId: any
+  ): Promise<any> {
     try {
       let query = `CALL spGetUserPatientProfiles(?,?,?)`;
       //return await this.conn.query(query);
@@ -199,7 +201,11 @@ export class AppMainService {
       throw new InternalServerErrorException();
     }
   }
-  async getUserPatientAddresses(CompCode: any, userType: any, userId: any): Promise<any> {
+  async getUserPatientAddresses(
+    CompCode: any,
+    userType: any,
+    userId: any
+  ): Promise<any> {
     try {
       let query = `CALL spGetUserPatientAddresses (?,?,?)`;
       //return await this.conn.query(query);
@@ -302,7 +308,11 @@ export class AppMainService {
     }
   }
 
-  async getPushNotifications(CompCode: any, userType: any, userId: any): Promise<any> {
+  async getPushNotifications(
+    CompCode: any,
+    userType: any,
+    userId: any
+  ): Promise<any> {
     try {
       let query = `CALL spGetDataPushNotifications (?,?,?)`;
       //return await this.conn.query(query);
@@ -313,12 +323,16 @@ export class AppMainService {
       throw new InternalServerErrorException();
     }
   }
-  async getUserConfigs(CompCode: any, userType: any, userId: any): Promise<any> {
+  async getUserConfigs(
+    CompCode: any,
+    userType: any,
+    userId: any
+  ): Promise<any> {
     try {
       let query = `CALL spGetDataUserConfigs (?,?,?)`;
       //return await this.conn.query(query);
       const data = await this.conn.query(query, [CompCode, userType, userId]);
-      console.log(data,"data")
+      console.log(data, "data");
       return { message: "successful", data: data[0] };
     } catch (error) {
       this.logger.error(error);
@@ -403,7 +417,7 @@ export class AppMainService {
       let query = `CALL spInsUser_login_logs('${CompCode}','${UserType}','${UserId}','${MobileNo}','${DeviceName}','${ExpoDeviceId}','${SystemOS}','${SystemOSVerNo}','${ExpoNotificationToken}')`;
       //return await this.conn.query(query);
       const data = await this.conn.query(query);
- 
+
       return { message: "successful", data: data[0] };
     } catch (error) {
       this.logger.error(error);
@@ -438,6 +452,4 @@ export class AppMainService {
       throw new InternalServerErrorException();
     }
   }
-
-
 }
