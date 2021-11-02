@@ -231,4 +231,27 @@ export class LeadsManagementService {
       throw new InternalServerErrorException();
     }
   }
+
+  // spGetLeadsViewData
+  async getDataCRM_RMCallerDashboard(
+    CompCode,
+    TranType,
+    FromDate,
+    ToDate
+  ): Promise<any> {
+    try {
+      let query = `call spGetDataCRM_RMCallerDashboard(?,?,?,?);`;
+      const res = await this.conn.query(query, [
+        CompCode,
+        TranType,
+        FromDate,
+        ToDate,
+      ]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 }

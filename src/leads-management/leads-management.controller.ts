@@ -106,4 +106,20 @@ export class LeadsManagementController {
   ): Promise<any> {
     return this.leads.getLeadsViewData(CompCode, LeadId);
   }
+
+  // getDataCRM_RMCallerDashboard;
+  @Get("getDataCRM_RMCallerDashboard/:CompCode/:TranType/:FromDate/:ToDate")
+  getDataCRM_RMCallerDashboard(
+    @Param("CompCode") CompCode: any,
+    @Param("TranType") LeadId: any,
+    @Param("FromDate") FromDate: any,
+    @Param("ToDate") ToDate: any
+  ): Promise<any> {
+    return this.leads.getDataCRM_RMCallerDashboard(
+      CompCode,
+      LeadId,
+      FromDate,
+      ToDate
+    );
+  }
 }
