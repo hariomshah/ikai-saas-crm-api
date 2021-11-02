@@ -50,4 +50,60 @@ export class LeadsManagementController {
       TranMode
     );
   }
+
+  // getDataLeadsActionStatus
+  @Get("getDataLeadsActionStatus/:CompCode")
+  getDataLeadsActionStatus(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.leads.getDataLeadsActionStatus(CompCode);
+  }
+
+  // getDataCRMLoanType
+
+  @Get("getDataCRMLoanType/:CompCode")
+  getDataCRMLoanType(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.leads.getDataCRMLoanType(CompCode);
+  }
+
+  // getDataLeadsPriority
+  @Get("getDataLeadsPriority/:CompCode")
+  getDataLeadsPriority(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.leads.getDataLeadsPriority(CompCode);
+  }
+
+  // getDataLeadsDetails
+  @Get("getDataLeadsHistoryDetails/:CompCode/:LeadId")
+  getDataLeadsHistoryDetails(
+    @Param("CompCode") CompCode: any,
+    @Param("LeadId") LeadId: any
+  ): Promise<any> {
+    return this.leads.getDataLeadsHistoryDetails(CompCode, LeadId);
+  }
+
+  // getLeadsDataCallerRM
+  @Get("getLeadsDataCallerRM/:CompCode/:TranType/:TranUser")
+  getLeadsDataCallerRM(
+    @Param("CompCode") CompCode: any,
+    @Param("TranType") TranType: any,
+    @Param("TranUser") TranUser: any
+  ): Promise<any> {
+    return this.leads.getLeadsDataCallerRM(CompCode, TranType, TranUser);
+  }
+
+  // validateLeadId
+  @Get("validateLeadId/:CompCode/:LeadId")
+  validateLeadId(
+    @Param("CompCode") CompCode: any,
+    @Param("LeadId") LeadId: any
+  ): Promise<any> {
+    return this.leads.validateLeadId(CompCode, LeadId);
+  }
+
+  // getLeadsViewData;
+  @Get("getLeadsViewData/:CompCode/:LeadId")
+  getLeadsViewData(
+    @Param("CompCode") CompCode: any,
+    @Param("LeadId") LeadId: any
+  ): Promise<any> {
+    return this.leads.getLeadsViewData(CompCode, LeadId);
+  }
 }

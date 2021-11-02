@@ -115,6 +115,7 @@ export class LeadsManagementService {
     } catch (error) {
       await queryRunner.rollbackTransaction();
       this.logger.error(error);
+      return { message: "unsuccessful" };
       throw new InternalServerErrorException();
     } finally {
       await queryRunner.release();
@@ -130,6 +131,99 @@ export class LeadsManagementService {
     try {
       let query = `call spGetDataAssign_and_Transfer_Leads(?,?,?);`;
       const res = await this.conn.query(query, [CompCode, TranType, TranMode]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetDataLeadsActionStatus
+  async getDataLeadsActionStatus(CompCode): Promise<any> {
+    try {
+      let query = `call spGetDataLeadsActionStatus(?);`;
+      const res = await this.conn.query(query, [CompCode]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetDataCRMLoanType
+
+  async getDataCRMLoanType(CompCode): Promise<any> {
+    try {
+      let query = `call spGetDataCRMLoanType(?);`;
+      const res = await this.conn.query(query, [CompCode]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetDataLeadsPriority
+
+  async getDataLeadsPriority(CompCode): Promise<any> {
+    try {
+      let query = `call spGetDataLeadsPriority(?);`;
+      const res = await this.conn.query(query, [CompCode]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetDataLeadsDetails
+  async getDataLeadsHistoryDetails(CompCode, LeadId): Promise<any> {
+    try {
+      let query = `call spGetDataLeadsHistoryDetails(?,?);`;
+      const res = await this.conn.query(query, [CompCode, LeadId]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetLeadsDataCallerRM
+  async getLeadsDataCallerRM(CompCode, TranType, TranUser): Promise<any> {
+    try {
+      let query = `call spGetLeadsDataCallerRM(?,?,?);`;
+      const res = await this.conn.query(query, [CompCode, TranType, TranUser]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spValidateLeadId
+  async validateLeadId(CompCode, LeadId): Promise<any> {
+    try {
+      let query = `call spValidateLeadId(?,?);`;
+      const res = await this.conn.query(query, [CompCode, LeadId]);
+
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spGetLeadsViewData
+  async getLeadsViewData(CompCode, LeadId): Promise<any> {
+    try {
+      let query = `call spGetLeadsViewData(?,?);`;
+      const res = await this.conn.query(query, [CompCode, LeadId]);
 
       return { message: "successful", data: res[0] };
     } catch (error) {
