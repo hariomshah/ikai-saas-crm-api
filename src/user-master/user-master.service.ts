@@ -18,7 +18,7 @@ export class UserMasterService {
 
   async insUpdtUserMaster(data: any): Promise<any> {
     try {
-      let query = `CALL spInsUpdtUserMaster (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+      let query = `CALL spInsUpdtUserMaster (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
       // console.log(data)
       //return await this.conn.query(query);
       const res = await this.conn.query(query, [
@@ -50,7 +50,7 @@ export class UserMasterService {
         data.Show_Kitchen_Alert,
         data.Show_Admin_Alert,
         data.Show_Waiter_Alert,
-        ,
+        data.defaultUserPath,
       ]);
       return { message: "successful", data: res[0] };
     } catch (error) {
@@ -178,7 +178,7 @@ export class UserMasterService {
     // console.log(data);
     try {
       let query = `CALL spInsUpdtUserAddresses (?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-      
+
       const res = await this.conn.query(query, [
         data.CompCode,
         data.AddressId,

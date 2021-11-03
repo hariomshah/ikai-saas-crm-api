@@ -14,7 +14,7 @@ export class EmployeeService {
   async insUpdtEmployeeMaster(data: any): Promise<any> {
     try {
       let query = `CALL spInsUpdtEmployeeMaster (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-      // console.log(data, "data");
+      console.log(data, "data");
       //return await this.conn.query(query);
       const res = await this.conn.query(query, [
         data.CompCode,
@@ -48,7 +48,7 @@ export class EmployeeService {
         data.UpdtUsr,
         data.DesignationCode,
         data.ProfilePicture,
-        data.pathType,
+        data.pathType === null ? "U" : data.pathType,
         data.ReportingManager,
       ]);
       // console.log('employee design', data.DesignationCode)
