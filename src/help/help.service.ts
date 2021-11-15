@@ -12,9 +12,8 @@ export class HelpService {
   constructor(
     private readonly conn: Connection,
     private notifyEvents: NotifyEventsService
-  ) { }
+  ) {}
   async insHelpTran(data: any): Promise<any> {
-
     const {
       CompCode,
       UserType,
@@ -30,7 +29,7 @@ export class HelpService {
 
     try {
       let query = `CALL spInshelpcenter_tran (?,?,?,?,?,?,?,?,?,?)`;
-      
+
       const data = await this.conn.query(query, [
         CompCode,
         UserType,
@@ -47,7 +46,7 @@ export class HelpService {
       const dt = {
         TicketNo: data[0][0].TicketNo,
       };
-      this.notifyEvents.processEvents(CompCode,"SUPPORT", dt);
+      this.notifyEvents.processEvents(CompCode, "SUPPORT", dt);
 
       return { message: "successful", data: data[0] };
     } catch (error) {

@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "192.168.0.109",
+  "host": "202.134.191.142",
   "port": 3166,
   "username": "root",
   "password": "Skyelint@2020",
-  "database": "ikai-saas-dev",
+  "database": "ikai-saas-crm",
   "synchronize": false
 }

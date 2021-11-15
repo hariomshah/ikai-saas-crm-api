@@ -8,7 +8,7 @@ import { UseGuards } from "@nestjs/common";
 export class OtherMasterController {
   private logger = new Logger("OtherMasterController ");
 
-  constructor(private othermaster: OtherMasterService) { }
+  constructor(private othermaster: OtherMasterService) {}
   @Post("getOtherMaster")
   getOtherMaster(
     @Body("CompCode") CompCode: any,
@@ -88,5 +88,26 @@ export class OtherMasterController {
   @Get("getDeliveryStatus/:CompCode")
   getDeliveryStatus(@Param("CompCode") CompCode: any): Promise<any> {
     return this.othermaster.getOtherMaster(CompCode, "DLRYSTS");
+  }
+
+  @Get("getCallerStatus/:CompCode")
+  getCallerStatus(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.othermaster.getOtherMaster(CompCode, "CLRSTS");
+  }
+  @Get("getRMStatus/:CompCode")
+  getRMStatus(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.othermaster.getOtherMaster(CompCode, "RMSTS");
+  }
+  @Get("getLeadsStatus/:CompCode")
+  getLeadsStatus(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.othermaster.getOtherMaster(CompCode, "LEADSSTS");
+  }
+  @Get("getLoanType/:CompCode")
+  getLoanType(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.othermaster.getOtherMaster(CompCode, "LOANTYP");
+  }
+  @Get("getPriorityType/:CompCode")
+  getPriorityType(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.othermaster.getOtherMaster(CompCode, "PRIOR");
   }
 }
