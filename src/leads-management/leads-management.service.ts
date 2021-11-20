@@ -92,6 +92,7 @@ export class LeadsManagementService {
 
       let i = 0;
 
+      console.log(data.LeadAction);
       for (i; i < data.LeadAction.length; i++) {
         resData = await queryRunner
           .query("CALL spInsUpdtLeadAssignAndTransfer (?,?,?,?,?,?,?,?)", [
@@ -252,6 +253,40 @@ export class LeadsManagementService {
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException();
+    }
+  }
+
+  async updtLeadsActionHdr(data: any): Promise<any> {
+    const queryRunner = this.conn.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      console.log(data,"data")
+      await queryRunner.query(
+        "CALL spUpdateLeadActionHdr (?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          data.CompCode,
+          data.LeadId,
+          data.LeadActionId,
+          data.TranType,
+          data.ActionStatus,
+          data.NextScheduleDateTime,
+          data.SysOption1,
+          data.SysOption2,
+          data.SysOption3,
+          data.Remark,
+          data.UpdtUsrId,
+        ]
+      );
+
+      await queryRunner.commitTransaction();
+      return { message: "successful" };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      this.logger.error(error);
+      throw new InternalServerErrorException(error);
+    } finally {
+      await queryRunner.release();
     }
   }
 }

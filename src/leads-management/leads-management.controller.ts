@@ -122,4 +122,9 @@ export class LeadsManagementController {
       ToDate
     );
   }
+
+  @Post("updtLeadsActionHdr")
+  updtLeadsActionHdr(@Body("data") data: any): Promise<any> {
+    return this.leads.updtLeadsActionHdr(data);
+  }
 }
