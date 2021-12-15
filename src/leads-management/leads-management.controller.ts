@@ -127,4 +127,12 @@ export class LeadsManagementController {
   updtLeadsActionHdr(@Body("data") data: any): Promise<any> {
     return this.leads.updtLeadsActionHdr(data);
   }
+
+  // getCRMEmployeePerformanceDashboard
+  @Get("getCRMEmployeePerformanceDashboard/:CompCode")
+  getCRMEmployeePerformanceDashboard(
+    @Param("CompCode") CompCode: any
+  ): Promise<any> {
+    return this.leads.getCRMEmployeePerformanceDashboard(CompCode);
+  }
 }

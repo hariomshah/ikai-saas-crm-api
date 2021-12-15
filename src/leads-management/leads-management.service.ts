@@ -261,7 +261,7 @@ export class LeadsManagementService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      console.log(data,"data")
+      // console.log(data,"data")
       await queryRunner.query(
         "CALL spUpdateLeadActionHdr (?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -278,6 +278,28 @@ export class LeadsManagementService {
           data.UpdtUsrId,
         ]
       );
+
+      await queryRunner.commitTransaction();
+      return { message: "successful" };
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      this.logger.error(error);
+      throw new InternalServerErrorException(error);
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  // spGetCRMEmployeePerformanceDashboard
+  async getCRMEmployeePerformanceDashboard(pCompCode): Promise<any> {
+    const queryRunner = this.conn.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      // console.log(data,"data")
+      await queryRunner.query("CALL spGetCRMEmployeePerformanceDashboard (?)", [
+        pCompCode,
+      ]);
 
       await queryRunner.commitTransaction();
       return { message: "successful" };
