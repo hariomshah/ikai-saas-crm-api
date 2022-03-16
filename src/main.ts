@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors();
   app.use(json({ limit: "50mb" }));
   app.use(urlencoded({ extended: true, limit: "50mb" }));
-  const port = process.env.port || 3010;
+  const port = process.env.port || 4019;
   await app.listen(port);
   console.log(
     `Application is running on: ${await app.getUrl()} => ${join(

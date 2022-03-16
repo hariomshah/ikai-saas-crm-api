@@ -135,4 +135,13 @@ export class LeadsManagementController {
   ): Promise<any> {
     return this.leads.getCRMEmployeePerformanceDashboard(CompCode);
   }
+
+  @Get("getDataCRMCallerRMPerformance/:CompCode/:FromDate/:ToDate")
+  getDataCRMCallerRMPerformance(
+    @Param("CompCode") CompCode: any,
+    @Param("FromDate") FromDate: any,
+    @Param("ToDate") ToDate: any
+  ): Promise<any> {
+    return this.leads.getDataCRMCallerRMPerformance(CompCode, FromDate, ToDate);
+  }
 }

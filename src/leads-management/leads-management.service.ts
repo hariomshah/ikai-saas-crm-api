@@ -261,9 +261,9 @@ export class LeadsManagementService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      // console.log(data,"data")
+      // console.log(data, "data");
       await queryRunner.query(
-        "CALL spUpdateLeadActionHdr (?,?,?,?,?,?,?,?,?,?,?)",
+        "CALL spUpdateLeadActionHdr (?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           data.CompCode,
           data.LeadId,
@@ -274,6 +274,7 @@ export class LeadsManagementService {
           data.SysOption1,
           data.SysOption2,
           data.SysOption3,
+          data.SysOption5,
           data.Remark,
           data.UpdtUsrId,
         ]
@@ -309,6 +310,24 @@ export class LeadsManagementService {
       throw new InternalServerErrorException(error);
     } finally {
       await queryRunner.release();
+    }
+  }
+
+  async getDataCRMCallerRMPerformance(
+    pCompCode,
+    pFromDate,
+    pToDate
+  ): Promise<any> {
+    try {
+      let query = `call spGetDataCRMCallerRMPerformance(?,?,?)`;
+      const res = await this.conn.query(query, [pCompCode, pFromDate, pToDate]);
+      let userData = null;
+      if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
+      }
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
     }
   }
 }
