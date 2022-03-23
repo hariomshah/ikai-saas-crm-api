@@ -43,7 +43,7 @@ export class LeadsManagementService {
       let i = 0;
       for (i; i < data.length; i++) {
         resData = await queryRunner
-          .query("CALL spInsUpdtLeadsMaster (?,?,?,?,?,?,?,?,?)", [
+          .query("CALL spInsUpdtLeadsMaster (?,?,?,?,?,?,?,?,?,?)", [
             data[i].CompCode,
             data[i].LeadId,
             data[i].LeadName,
@@ -51,6 +51,7 @@ export class LeadsManagementService {
             data[i].LeadSource,
             data[i].LeadType,
             data[i].ActionTaken,
+            data[i].Remark,
             data[i].LeadGenratedThrough,
             data[i].updt_usrId,
           ])
@@ -248,7 +249,7 @@ export class LeadsManagementService {
         FromDate,
         ToDate,
       ]);
-
+      // console.log(res[0], "res[0]");
       return { message: "successful", data: res[0] };
     } catch (error) {
       this.logger.error(error);
@@ -321,10 +322,10 @@ export class LeadsManagementService {
     try {
       let query = `call spGetDataCRMCallerRMPerformance(?,?,?)`;
       const res = await this.conn.query(query, [pCompCode, pFromDate, pToDate]);
-      let userData = null;
-      if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
-      }
-      return { message: "successful", data: res[0] };
+      // let userData = null;
+      // if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
+      // }
+      return { message: "successful", data: res };
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException();
