@@ -144,4 +144,10 @@ export class LeadsManagementController {
   ): Promise<any> {
     return this.leads.getDataCRMCallerRMPerformance(CompCode, FromDate, ToDate);
   }
+
+  // getDataListOfLeads
+  @Get("getDataListOfLeads/:CompCode")
+  getDataListOfLeads(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.leads.getDataListOfLeads(CompCode);
+  }
 }
