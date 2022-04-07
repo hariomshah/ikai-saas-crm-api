@@ -347,4 +347,18 @@ export class LeadsManagementService {
       throw new InternalServerErrorException();
     }
   }
+
+  async getDataHighPrioritiesLeads(pCompCode): Promise<any> {
+    try {
+      let query = `call spGetDataCRMHighPrioritiesLeads(?)`;
+      const res = await this.conn.query(query, [pCompCode]);
+      // let userData = null;
+      // if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
+      // }
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 }

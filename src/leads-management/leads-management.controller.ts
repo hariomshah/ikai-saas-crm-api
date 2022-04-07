@@ -150,4 +150,9 @@ export class LeadsManagementController {
   getDataListOfLeads(@Param("CompCode") CompCode: any): Promise<any> {
     return this.leads.getDataListOfLeads(CompCode);
   }
+
+  @Get("getDataHighPrioritiesLeads/:CompCode")
+  getDataHighPrioritiesLeads(@Param("CompCode") CompCode: any): Promise<any> {
+    return this.leads.getDataHighPrioritiesLeads(CompCode);
+  }
 }
