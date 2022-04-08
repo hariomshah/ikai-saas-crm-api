@@ -2094,7 +2094,8 @@ export class HtmlInventoryReportsService {
           pFromDate,
           pToDate,
         ]);
-        // console.log(dynamicRes);
+        console.log(pGroupOn, "pGroupOn");
+
         if (dynamicRes[0].length > 0) {
           //Set ReportDtl
           dynamicRes[0].forEach(async (row, idx) => {
@@ -2141,12 +2142,17 @@ export class HtmlInventoryReportsService {
       } else {
         resposeMessage = "Report config not defined!";
       }
-
-      console.log(ReportConfig.GeneralInfo, "ReportConfig.GeneralInfo.");
+      let GroupBy = null;
+      if (pGroupOn === "CALLER") {
+        GroupBy = "RM";
+      } else {
+        GroupBy = "CALLER";
+      }
+      console.log(GroupBy, "ReportConfig.GeneralInfo.");
       return {
         message: resposeMessage,
         ReportConfig,
-        data: { ReportGroup, ReportHdr },
+        data: { ReportGroup, ReportHdr,GroupBy },
       };
     } catch (error) {
       this.logger.error(error);

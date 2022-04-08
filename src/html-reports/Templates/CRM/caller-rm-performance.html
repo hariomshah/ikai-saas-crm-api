@@ -79,6 +79,9 @@
             <th style="vertical-align : middle;text-align:right;">
               Lead Status
             </th>
+            <th style="vertical-align : middle;text-align:right;">
+              Assigned {{data.GroupBy}} Name
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -100,6 +103,9 @@
 
             <td scope="row" class="p-2 text-right">
               {{this.LeadMainStatusDesc}}
+            </td>
+            <td scope="row" class="p-2 text-right">
+              {{this.AssignedRMName}}
             </td>
           </tr>
           {{/each}}
