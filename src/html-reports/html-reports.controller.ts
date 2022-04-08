@@ -1767,4 +1767,50 @@ export class HtmlReportsController {
         }
       });
   }
+
+  // sushil
+  @Post("getDataRPTCallerRMPerformance")
+  getDataRPTCallerRMPerformance(
+    @Body("CompCode") CompCode: any,
+    @Body("FromDate") FromDate: any,
+    @Body("ToDate") ToDate: any,
+    @Body("GroupOn") GroupOn: any,
+    @Body("OutputType") OutputType: any,
+    @Res() res: Response
+  ): any {
+    return this.invReports
+      .getDataRPTCallerRMPerformance(50, CompCode, GroupOn, FromDate, ToDate)
+      .then((result) => {
+        if (_.upperCase(OutputType) === "JSON") {
+          res.status(HttpStatus.CREATED).send(result);
+        } else {
+          let templatePath = "";
+          if (process.platform.trim() === "linux") {
+            templatePath = `${result.ReportConfig.Config.TemplatePath}/${result.ReportConfig.Config.TemplateName}`;
+          } else {
+            templatePath = `\\${result.ReportConfig.Config.TemplatePath}\\${result.ReportConfig.Config.TemplateName}`;
+          }
+
+          if (_.upperCase(OutputType) === "HTML") {
+            // let templatePath = `\\${result.ReportConfig.Config.TemplatePath}\\${result.ReportConfig.Config.TemplateName}`;
+            printPdf(templatePath, result, _.upperCase(OutputType)).then(
+              (html) => {
+                res.status(HttpStatus.CREATED).send(html);
+              }
+            );
+          } else {
+            // let templatePath = `\\${result.ReportConfig.Config.TemplatePath}\\${result.ReportConfig.Config.TemplateName}`;
+            printPdf(templatePath, result, _.upperCase(OutputType)).then(
+              (pdf) => {
+                res.set({
+                  "Content-Type": "application/pdf",
+                  "Content-Length": pdf.length,
+                });
+                res.status(HttpStatus.CREATED).send(pdf);
+              }
+            );
+          }
+        }
+      });
+  }
 }

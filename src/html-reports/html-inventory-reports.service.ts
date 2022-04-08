@@ -2062,4 +2062,95 @@ export class HtmlInventoryReportsService {
       throw new InternalServerErrorException();
     }
   }
+
+  // sushil
+  async getDataRPTCallerRMPerformance(
+    pReportId,
+    pCompCode,
+    pGroupOn,
+    pFromDate,
+    pToDate
+  ): Promise<any> {
+    const ReportId = pReportId;
+    try {
+      //Get Report configs
+      let dynamicRes;
+      let resposeMessage;
+      let query;
+
+      let ReportGroup = [];
+
+      const ReportConfig = await this.mainReport.getReportInfo(
+        ReportId,
+        pCompCode
+      );
+      // console.log("ss", ReportConfig);
+      //prepare data && fetch data from dynamic stored procedure
+      if (ReportConfig.ReportHdr.ReportSource) {
+        query = ReportConfig.ReportHdr.ReportSource;
+        dynamicRes = await this.conn.query(query, [
+          pCompCode,
+          pGroupOn,
+          pFromDate,
+          pToDate,
+        ]);
+        // console.log(dynamicRes);
+        if (dynamicRes[0].length > 0) {
+          //Set ReportDtl
+          dynamicRes[0].forEach(async (row, idx) => {
+            console.log(row);
+            let l_Index = ReportGroup.findIndex(
+              (oo) => oo.GroupCode === row.username
+            );
+            if (l_Index >= 0) {
+              ReportGroup[l_Index].DetailRows.push({
+                ...row,
+                SrNo: ReportGroup[l_Index].DetailRows.length + 1,
+              });
+            } else {
+              ReportGroup.push({
+                GroupCode: row.username,
+                GroupName: row.Name,
+                DetailRows: [{ ...row, SrNo: 1 }],
+              });
+            }
+          });
+
+          let ii = 0;
+          for (ii; ii < ReportGroup.length; ii++) {
+            let iRow = 0;
+            for (iRow; iRow < ReportGroup[ii].DetailRows.length; iRow++) {
+              ReportGroup[ii].DetailRows[iRow] = {
+                ...ReportGroup[ii].DetailRows[iRow],
+              };
+            }
+
+            var ReportHdr = {
+              Hdr: ReportConfig.ReportHdr.ReportName,
+              FromDate: moment(pFromDate, "YYYY-MM-DD").format(
+                ReportConfig.GeneralInfo.DateFormat
+              ),
+              ToDate: moment(pToDate, "YYYY-MM-DD").format(
+                ReportConfig.GeneralInfo.DateFormat
+              ),
+            };
+          }
+        } else {
+          resposeMessage = "No data found!";
+        }
+      } else {
+        resposeMessage = "Report config not defined!";
+      }
+
+      console.log(ReportConfig.GeneralInfo, "ReportConfig.GeneralInfo.");
+      return {
+        message: resposeMessage,
+        ReportConfig,
+        data: { ReportGroup, ReportHdr },
+      };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
 }
