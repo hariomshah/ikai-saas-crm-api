@@ -2079,6 +2079,10 @@ export class HtmlInventoryReportsService {
       let query;
 
       let ReportGroup = [];
+      let ReportSummary;
+
+      let l_TotalLeads = 0;
+      // let l_TotalCredit = 0;
 
       const ReportConfig = await this.mainReport.getReportInfo(
         ReportId,
@@ -2094,25 +2098,53 @@ export class HtmlInventoryReportsService {
           pFromDate,
           pToDate,
         ]);
-        console.log(pGroupOn, "pGroupOn");
+        // console.log(pGroupOn, "pGroupOn");
 
         if (dynamicRes[0].length > 0) {
           //Set ReportDtl
           dynamicRes[0].forEach(async (row, idx) => {
-            console.log(row);
+
+            
+            // console.log(row);
             let l_Index = ReportGroup.findIndex(
               (oo) => oo.GroupCode === row.username
             );
+            
+            // console.log(l_TotalLeads,"first")
+            let GroupBy = null;
+            if (pGroupOn === "CALLER") {
+              GroupBy = "RM";
+            } else {
+              GroupBy = "CALLER";
+            }
             if (l_Index >= 0) {
               ReportGroup[l_Index].DetailRows.push({
                 ...row,
                 SrNo: ReportGroup[l_Index].DetailRows.length + 1,
+                AssignedId:
+                  GroupBy === "RM"
+                    ? row.AssignedRMName === null
+                      ? "No RM Assigned Yet"
+                      : row.AssignedRMName
+                    : row.AssignedCallerName,
               });
             } else {
               ReportGroup.push({
                 GroupCode: row.username,
                 GroupName: row.Name,
-                DetailRows: [{ ...row, SrNo: 1 }],
+                Group: GroupBy,
+                DetailRows: [
+                  {
+                    ...row,
+                    SrNo: 1,
+                    AssignedId:
+                      GroupBy === "RM"
+                        ? row.AssignedRMName === null
+                          ? "No RM Assigned Yet"
+                          : row.AssignedRMName
+                        : row.AssignedCallerName,
+                  },
+                ],
               });
             }
           });
@@ -2142,17 +2174,11 @@ export class HtmlInventoryReportsService {
       } else {
         resposeMessage = "Report config not defined!";
       }
-      let GroupBy = null;
-      if (pGroupOn === "CALLER") {
-        GroupBy = "RM";
-      } else {
-        GroupBy = "CALLER";
-      }
-      console.log(GroupBy, "ReportConfig.GeneralInfo.");
+      // console.log(ReportHdr, "ReportConfig.GeneralInfo.");
       return {
         message: resposeMessage,
         ReportConfig,
-        data: { ReportGroup, ReportHdr,GroupBy },
+        data: { ReportGroup, ReportHdr },
       };
     } catch (error) {
       this.logger.error(error);
