@@ -2103,13 +2103,11 @@ export class HtmlInventoryReportsService {
         if (dynamicRes[0].length > 0) {
           //Set ReportDtl
           dynamicRes[0].forEach(async (row, idx) => {
-
-            
-            // console.log(row);
+            // console.log(row)
             let l_Index = ReportGroup.findIndex(
               (oo) => oo.GroupCode === row.username
             );
-            
+
             // console.log(l_TotalLeads,"first")
             let GroupBy = null;
             if (pGroupOn === "CALLER") {
@@ -2145,9 +2143,12 @@ export class HtmlInventoryReportsService {
                         : row.AssignedCallerName,
                   },
                 ],
+                
               });
             }
           });
+
+          // l_TotalLeads += parseFloat(ReportGroup.DetailRows); 
 
           let ii = 0;
           for (ii; ii < ReportGroup.length; ii++) {
@@ -2166,6 +2167,7 @@ export class HtmlInventoryReportsService {
               ToDate: moment(pToDate, "YYYY-MM-DD").format(
                 ReportConfig.GeneralInfo.DateFormat
               ),
+              // TotalLeads: l_TotalLeads
             };
           }
         } else {
