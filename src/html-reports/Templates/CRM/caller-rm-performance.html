@@ -1,117 +1,117 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Caller RM Performance</title>
-    <link rel="stylesheet" href="style.css" media="all" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <style>
-      @page {
-        size: auto;
-      }
-      html {
-        font-size: 0.75rem;
-      }
-      thead th {
-        background-color: #e0edf1;
-      }
-    </style>
-  </head>
 
-  <body class="p-2">
-    {{#if ReportConfig.Config.showReportHeader}}
-    <div class="container-fluid d-flex justify-content-between">
-      <div>
-        <img
-          src={{ReportConfig.GeneralInfo.LogoPath}}
-          height="120px"
-          width="120px"
-        />
-      </div>
-      <div class="h6 text-right">
-        <b class="h4 font-bold">{{ReportConfig.GeneralInfo.compName}}</b>
-        <br />
-        {{ReportConfig.GeneralInfo.address1}},<br />
-        {{ReportConfig.GeneralInfo.address2}}
-        {{ReportConfig.GeneralInfo.Pin}},<br />
-        {{ReportConfig.GeneralInfo.City}}
-        {{ReportConfig.GeneralInfo.Country}}<br />
-        {{ReportConfig.GeneralInfo.mobile}}<br />
-        GST No.{{ReportConfig.GeneralInfo.GST}}<br />
-        CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
-        <div class="blockquote-footer">
-          <a href="mailto:{{ReportConfig.GeneralInfo.email}}"
-            >{{ReportConfig.GeneralInfo.email}}</a
-          >
-        </div>
+<head>
+  <meta charset="utf-8" />
+  <title>Caller RM Performance</title>
+  <link rel="stylesheet" href="style.css" media="all" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    @page {
+      size: auto;
+    }
+
+    html {
+      font-size: 0.75rem;
+    }
+
+    thead th {
+      background-color: #e0edf1;
+    }
+  </style>
+</head>
+
+<body class="p-2">
+  {{#if ReportConfig.Config.showReportHeader}}
+  <div class="container-fluid d-flex justify-content-between">
+    <div>
+      <img src={{ReportConfig.GeneralInfo.LogoPath}} height="120px" width="120px" />
+    </div>
+    <div class="h6 text-right">
+      <b class="h4 font-bold">{{ReportConfig.GeneralInfo.compName}}</b>
+      <br />
+      {{ReportConfig.GeneralInfo.address1}},<br />
+      {{ReportConfig.GeneralInfo.address2}}
+      {{ReportConfig.GeneralInfo.Pin}},<br />
+      {{ReportConfig.GeneralInfo.City}}
+      {{ReportConfig.GeneralInfo.Country}}<br />
+      {{ReportConfig.GeneralInfo.mobile}}<br />
+      GST No.{{ReportConfig.GeneralInfo.GST}}<br />
+      CIN No.{{ReportConfig.GeneralInfo.CIN_No}}<br />
+      <div class="blockquote-footer">
+        <a href="mailto:{{ReportConfig.GeneralInfo.email}}">{{ReportConfig.GeneralInfo.email}}</a>
       </div>
     </div>
-    <hr class="my-3" />
-    {{/if}}
-    <p class="font-weight-bold text-center ">
-      {{data.ReportHdr.Hdr}} ({{data.ReportHdr.FromDate}} To
-      {{data.ReportHdr.ToDate}})
-    </p>
-    <hr class="my-3" />
-    <main>
-      {{#each data.ReportGroup}}
+  </div>
+  <hr class="my-3" />
+  {{/if}}
+  <p class="font-weight-bold text-center ">
+    {{data.ReportHdr.Hdr}} ({{data.ReportHdr.FromDate}} To
+    {{data.ReportHdr.ToDate}})
+  </p>
+  <hr class="my-3" />
+  <main>
+    {{#each data.ReportGroup}}
+    <div class="d-flex flex justify-between">
       <h5 class="font-weight-bold text-left ">
         {{this.GroupName}}
       </h5>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th style="vertical-align : middle;text-align:center;">
-              Sr. No.
-            </th>
-            <th style="vertical-align : middle;text-align:left;">
-              Lead Name
-            </th>
-            <th style="vertical-align : middle;text-align:left;">
-              Lead Mobile
-            </th>
-            <th style="vertical-align : middle;text-align:right;">Loan Desc</th>
-            <th style="vertical-align : middle;text-align:right;">
-              Loan Amount
-            </th>
-            <th style="vertical-align : middle;text-align:right;">
-              Lead Status
-            </th>
-            <th style="vertical-align : middle;text-align:right;">
-              Assigned {{this.Group}} Name
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each this.DetailRows}}
-          <tr>
-            <td scope="row" class="p-2 font-weight-bold">{{this.SrNo}}</td>
-            <td scope="row" class="p-2">
-              {{this.LeadName}}
-            </td>
-            <td scope="row" class="p-2 font-weight-bold">
-              {{this.LeadMob}}
-            </td>
-            <td scope="row" class="p-2 text-right">
-              {{this.LoanDesc}}
-            </td>
-            <td scope="row" class="p-2 text-right">
-              {{this.LoanAmount}}
-            </td>
+      <h5 class="font-weight-bold  text-right">
+        TotalLeads: {{this.TotalLeads}}
+      </h5>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th style="vertical-align : middle;text-align:center;">
+            Sr. No.
+          </th>
+          <th style="vertical-align : middle;text-align:left;">
+            Lead Name
+          </th>
+          <th style="vertical-align : middle;text-align:left;">
+            Lead Mobile
+          </th>
+          <th style="vertical-align : middle;text-align:right;">Loan Desc</th>
+          <th style="vertical-align : middle;text-align:right;">
+            Loan Amount
+          </th>
+          <th style="vertical-align : middle;text-align:right;">
+            Lead Status
+          </th>
+          <th style="vertical-align : middle;text-align:right;">
+            Assigned {{this.Group}} Name
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.DetailRows}}
+        <tr>
+          <td scope="row" class="p-2 font-weight-bold">{{this.SrNo}}</td>
+          <td scope="row" class="p-2">
+            {{this.LeadName}}
+          </td>
+          <td scope="row" class="p-2 font-weight-bold">
+            {{this.LeadMob}}
+          </td>
+          <td scope="row" class="p-2 text-right">
+            {{this.LoanDesc}}
+          </td>
+          <td scope="row" class="p-2 text-right">
+            {{this.LoanAmount}}
+          </td>
 
-            <td scope="row" class="p-2 text-right">
-              {{this.LeadMainStatusDesc}}
-            </td>
-            <td scope="row" class="p-2 text-right">
-              {{this.AssignedId}}
-            </td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
-      {{/each}}
-    </main>
-  </body>
+          <td scope="row" class="p-2 text-right">
+            {{this.LeadMainStatusDesc}}
+          </td>
+          <td scope="row" class="p-2 text-right">
+            {{this.AssignedId}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/each}}
+  </main>
+</body>
+
 </html>

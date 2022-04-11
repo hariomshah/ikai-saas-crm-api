@@ -20,7 +20,7 @@ export class HtmlInventoryReportsService {
   constructor(
     private readonly conn: Connection,
     private mainReport: HtmlReportsService
-  ) {}
+  ) { }
 
   //getDataInvRPTTopNSalesAnalysis
   //20210217 Hari/Govind/Saurav
@@ -78,16 +78,16 @@ export class HtmlInventoryReportsService {
             pAnalysis_Type === "ITEM"
               ? "Item"
               : pAnalysis_Type === "SUBCAT"
-              ? "Sub Category"
-              : pAnalysis_Type === "CAT"
-              ? "Category"
-              : pAnalysis_Type === "BRAND"
-              ? "Brand"
-              : pAnalysis_Type === "MFR"
-              ? "Manufacturer"
-              : pAnalysis_Type === "CLASS"
-              ? "Class"
-              : "",
+                ? "Sub Category"
+                : pAnalysis_Type === "CAT"
+                  ? "Category"
+                  : pAnalysis_Type === "BRAND"
+                    ? "Brand"
+                    : pAnalysis_Type === "MFR"
+                      ? "Manufacturer"
+                      : pAnalysis_Type === "CLASS"
+                        ? "Class"
+                        : "",
             "Value",
           ]);
           dynamicRes[0].forEach(async (row, idx) => {
@@ -115,16 +115,16 @@ export class HtmlInventoryReportsService {
               (pAnalysis_Type === "ITEM"
                 ? "Item Wise"
                 : pAnalysis_Type === "SUBCAT"
-                ? "Sub Category Wise"
-                : pAnalysis_Type === "CAT"
-                ? "Category Wise"
-                : pAnalysis_Type === "BRAND"
-                ? "Brand Wise"
-                : pAnalysis_Type === "MFR"
-                ? "Manufacturer Wise"
-                : pAnalysis_Type === "CLASS"
-                ? "Class Wise"
-                : "") +
+                  ? "Sub Category Wise"
+                  : pAnalysis_Type === "CAT"
+                    ? "Category Wise"
+                    : pAnalysis_Type === "BRAND"
+                      ? "Brand Wise"
+                      : pAnalysis_Type === "MFR"
+                        ? "Manufacturer Wise"
+                        : pAnalysis_Type === "CLASS"
+                          ? "Class Wise"
+                          : "") +
               ") [" +
               pTopNRecords +
               "]",
@@ -317,26 +317,26 @@ export class HtmlInventoryReportsService {
                     : parseFloat(ReportGroup[ii].DetailRows[iRow].PurchaseQty),
                 TransferInQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].TransferInQty) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferInQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].TransferInQty
+                    ),
                 SaleReturnQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleReturnQty) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleReturnQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].SaleReturnQty
+                    ),
                 StockAdjPlusQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
+                    ),
                 SalesQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SalesQty) === 0
                     ? "-"
@@ -347,108 +347,108 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferOutQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].TransferOutQty
+                    ),
                 PurchaseReturnQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
+                    ),
                 StockAdjMinusQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
+                    ),
                 ClosingStockQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].ClosingStockQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].ClosingStockQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].ClosingStockQty
+                    ),
                 OpeningAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].OpeningAmount) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].OpeningAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].OpeningAmount
+                    ).toFixed(2),
                 PurchaseAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseAmount
+                    ).toFixed(2),
                 TransferInAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].TransferInAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferInAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].TransferInAmount
+                    ).toFixed(2),
                 SaleReturnAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
+                    ).toFixed(2),
                 StockAdjPlusAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
+                    ).toFixed(2),
                 SalesAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SalesAmount) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SalesAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SalesAmount
+                    ).toFixed(2),
                 TransferOutAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].TransferOutAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferOutAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].TransferOutAmount
+                    ).toFixed(2),
                 PurchaseReturnAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
+                    ).toFixed(2),
                 StockAdjMinusAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
+                    ).toFixed(2),
                 ClosingAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].ClosingAmount) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].ClosingAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].ClosingAmount
+                    ).toFixed(2),
               };
             }
 
@@ -633,35 +633,35 @@ export class HtmlInventoryReportsService {
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleQty) === 0
                     ? 0
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty
+                    ).toFixed(2),
 
                 SaleValue:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleValue) === 0
                     ? 0
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue
+                    ).toFixed(2),
                 CostValue:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].CostValue) === 0
                     ? 0
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue
+                    ).toFixed(2),
 
                 Diff:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Diff) === 0
                     ? 0
                     : parseFloat(ReportGroup[ii].DetailRows[iRow].Diff).toFixed(
-                        2
-                      ),
+                      2
+                    ),
                 Margin:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Margin) === 0 ||
-                  !ReportGroup[ii].DetailRows[iRow].Margin
+                    !ReportGroup[ii].DetailRows[iRow].Margin
                     ? 0
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin
+                    ).toFixed(2),
               };
             }
 
@@ -803,35 +803,35 @@ export class HtmlInventoryReportsService {
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleQty) === 0
                     ? "0"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty
+                    ).toFixed(2),
 
                 SaleValue:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleValue) === 0
                     ? "0"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue
+                    ).toFixed(2),
                 CostValue:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].CostValue) === 0
                     ? "0"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue
+                    ).toFixed(2),
 
                 Diff:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Diff) === 0
                     ? "0"
                     : parseFloat(ReportGroup[ii].DetailRows[iRow].Diff).toFixed(
-                        2
-                      ),
+                      2
+                    ),
                 Margin:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Margin) === 0 ||
-                  !ReportGroup[ii].DetailRows[iRow].Margin
+                    !ReportGroup[ii].DetailRows[iRow].Margin
                     ? "0"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin
+                    ).toFixed(2),
               };
             }
 
@@ -1021,11 +1021,11 @@ export class HtmlInventoryReportsService {
                 ItemName: ReportGroup[ii].DetailRows[iRow].ItemName,
                 SaleQty_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleQty_Curr) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_Curr
+                    ).toFixed(2),
 
                 SaleValue_Curr:
                   parseFloat(
@@ -1033,38 +1033,38 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_Curr
+                    ).toFixed(2),
                 CostValue_Curr:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_Curr
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_Curr
+                    ).toFixed(2),
 
                 Diff_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Diff_Curr) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_Curr
+                    ).toFixed(2),
                 Margin_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Margin_Curr) ===
                     0 || !ReportGroup[ii].DetailRows[iRow].Margin_Curr
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_Curr
+                    ).toFixed(2),
                 SaleQty_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
+                    ).toFixed(2),
 
                 SaleValue_CurrMinus1:
                   parseFloat(
@@ -1072,16 +1072,16 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus1
+                    ).toFixed(2),
                 CostValue_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
+                    ).toFixed(2),
 
                 Diff_CurrMinus1:
                   parseFloat(
@@ -1089,24 +1089,24 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus1
+                    ).toFixed(2),
                 Margin_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
                   ) === 0 || !ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
+                    ).toFixed(2),
                 SaleQty_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
+                    ).toFixed(2),
 
                 SaleValue_CurrMinus2:
                   parseFloat(
@@ -1114,16 +1114,16 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus2
+                    ).toFixed(2),
                 CostValue_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
+                    ).toFixed(2),
 
                 Diff_CurrMinus2:
                   parseFloat(
@@ -1131,25 +1131,25 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus2
+                    ).toFixed(2),
                 Margin_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
                   ) === 0 || !ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
+                    ).toFixed(2),
 
                 Margin_diff1:
                   Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1) >
-                  Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2)
+                    Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2)
                     ? true
                     : false,
                 Margin_diff:
                   Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_Curr) >
-                  Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1)
+                    Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1)
                     ? true
                     : false,
               };
@@ -1384,11 +1384,11 @@ export class HtmlInventoryReportsService {
                 ItemName: ReportGroup[ii].DetailRows[iRow].ItemName,
                 SaleQty_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleQty_Curr) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_Curr
+                    ).toFixed(2),
 
                 SaleValue_Curr:
                   parseFloat(
@@ -1396,38 +1396,38 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_Curr
+                    ).toFixed(2),
                 CostValue_Curr:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_Curr
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_Curr
+                    ).toFixed(2),
 
                 Diff_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Diff_Curr) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_Curr
+                    ).toFixed(2),
                 Margin_Curr:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].Margin_Curr) ===
                     0 || !ReportGroup[ii].DetailRows[iRow].Margin_Curr
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_Curr
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_Curr
+                    ).toFixed(2),
                 SaleQty_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus1
+                    ).toFixed(2),
 
                 SaleValue_CurrMinus1:
                   parseFloat(
@@ -1435,16 +1435,16 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus1
+                    ).toFixed(2),
                 CostValue_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus1
+                    ).toFixed(2),
 
                 Diff_CurrMinus1:
                   parseFloat(
@@ -1452,24 +1452,24 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus1
+                    ).toFixed(2),
                 Margin_CurrMinus1:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
                   ) === 0 || !ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1
+                    ).toFixed(2),
                 SaleQty_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleQty_CurrMinus2
+                    ).toFixed(2),
 
                 SaleValue_CurrMinus2:
                   parseFloat(
@@ -1477,16 +1477,16 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleValue_CurrMinus2
+                    ).toFixed(2),
                 CostValue_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].CostValue_CurrMinus2
+                    ).toFixed(2),
 
                 Diff_CurrMinus2:
                   parseFloat(
@@ -1494,25 +1494,25 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Diff_CurrMinus2
+                    ).toFixed(2),
                 Margin_CurrMinus2:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
                   ) === 0 || !ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2
+                    ).toFixed(2),
 
                 Margin_diff1:
                   Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1) >
-                  Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2)
+                    Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus2)
                     ? true
                     : false,
                 Margin_diff:
                   Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_Curr) >
-                  Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1)
+                    Math.abs(ReportGroup[ii].DetailRows[iRow].Margin_CurrMinus1)
                     ? true
                     : false,
               };
@@ -1840,26 +1840,26 @@ export class HtmlInventoryReportsService {
                     : parseFloat(ReportGroup[ii].DetailRows[iRow].PurchaseQty),
                 TransferInQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].TransferInQty) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferInQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].TransferInQty
+                    ),
                 SaleReturnQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SaleReturnQty) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleReturnQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].SaleReturnQty
+                    ),
                 StockAdjPlusQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjPlusQty
+                    ),
                 SalesQty:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SalesQty) === 0
                     ? "-"
@@ -1870,108 +1870,108 @@ export class HtmlInventoryReportsService {
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferOutQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].TransferOutQty
+                    ),
                 PurchaseReturnQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseReturnQty
+                    ),
                 StockAdjMinusQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjMinusQty
+                    ),
                 ClosingStockQty:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].ClosingStockQty
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].ClosingStockQty
-                      ),
+                      ReportGroup[ii].DetailRows[iRow].ClosingStockQty
+                    ),
                 OpeningAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].OpeningAmount) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].OpeningAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].OpeningAmount
+                    ).toFixed(2),
                 PurchaseAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseAmount
+                    ).toFixed(2),
                 TransferInAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].TransferInAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferInAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].TransferInAmount
+                    ).toFixed(2),
                 SaleReturnAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SaleReturnAmount
+                    ).toFixed(2),
                 StockAdjPlusAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjPlusAmount
+                    ).toFixed(2),
                 SalesAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].SalesAmount) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].SalesAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].SalesAmount
+                    ).toFixed(2),
                 TransferOutAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].TransferOutAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].TransferOutAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].TransferOutAmount
+                    ).toFixed(2),
                 PurchaseReturnAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].PurchaseReturnAmount
+                    ).toFixed(2),
                 StockAdjMinusAmount:
                   parseFloat(
                     ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
                   ) === 0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].StockAdjMinusAmount
+                    ).toFixed(2),
                 ClosingAmount:
                   parseFloat(ReportGroup[ii].DetailRows[iRow].ClosingAmount) ===
-                  0
+                    0
                     ? "-"
                     : parseFloat(
-                        ReportGroup[ii].DetailRows[iRow].ClosingAmount
-                      ).toFixed(2),
+                      ReportGroup[ii].DetailRows[iRow].ClosingAmount
+                    ).toFixed(2),
               };
             }
 
@@ -2103,12 +2103,11 @@ export class HtmlInventoryReportsService {
         if (dynamicRes[0].length > 0) {
           //Set ReportDtl
           dynamicRes[0].forEach(async (row, idx) => {
-            // console.log(row)
+            // console.log(row.length,"row.length")
             let l_Index = ReportGroup.findIndex(
               (oo) => oo.GroupCode === row.username
             );
 
-            // console.log(l_TotalLeads,"first")
             let GroupBy = null;
             if (pGroupOn === "CALLER") {
               GroupBy = "RM";
@@ -2127,10 +2126,12 @@ export class HtmlInventoryReportsService {
                     : row.AssignedCallerName,
               });
             } else {
+              // console.log(row, "row")
               ReportGroup.push({
                 GroupCode: row.username,
                 GroupName: row.Name,
                 Group: GroupBy,
+                // TotalLeads: ReportGroup[l_Index],
                 DetailRows: [
                   {
                     ...row,
@@ -2143,15 +2144,20 @@ export class HtmlInventoryReportsService {
                         : row.AssignedCallerName,
                   },
                 ],
-                
               });
             }
           });
+          
 
-          // l_TotalLeads += parseFloat(ReportGroup.DetailRows); 
-
+          // l_TotalLeads += parseFloat(ReportGroup.DetailRows);
+          // console.log(ReportGroup, "ReportGroup.length");
           let ii = 0;
           for (ii; ii < ReportGroup.length; ii++) {
+            ReportGroup[ii] = {
+              ...ReportGroup[ii], TotalLeads: ReportGroup[ii].DetailRows.length
+            }
+            // l_TotalLeads = ReportGroup[ii].DetailRows.length;
+            // console.log(l_TotalLeads, "l_TotalLeads")
             let iRow = 0;
             for (iRow; iRow < ReportGroup[ii].DetailRows.length; iRow++) {
               ReportGroup[ii].DetailRows[iRow] = {
@@ -2176,7 +2182,7 @@ export class HtmlInventoryReportsService {
       } else {
         resposeMessage = "Report config not defined!";
       }
-      // console.log(ReportHdr, "ReportConfig.GeneralInfo.");
+      // console.log(ReportGroup, "4");
       return {
         message: resposeMessage,
         ReportConfig,
