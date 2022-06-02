@@ -244,7 +244,7 @@ export class LeadsManagementService {
     try {
       let query = `call spGetDataCRM_RMCallerDashboard(?,?,?,?);`;
       const res = await this.conn.query(query, [
-        CompCode,
+        CompCode, 
         TranType,
         FromDate,
         ToDate,
