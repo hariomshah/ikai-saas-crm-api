@@ -155,4 +155,12 @@ export class LeadsManagementController {
   getDataHighPrioritiesLeads(@Param("CompCode") CompCode: any): Promise<any> {
     return this.leads.getDataHighPrioritiesLeads(CompCode);
   }
+
+  @Get("validateLeadMobNo/:CompCode/:LeadMob")
+  validateLeadMobNo(
+    @Param("CompCode") CompCode: any,
+    @Param("LeadMob") LeadMob: any
+  ): Promise<any> {
+    return this.leads.validateLeadMobNo(CompCode, LeadMob);
+  }
 }

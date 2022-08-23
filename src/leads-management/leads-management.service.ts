@@ -244,7 +244,7 @@ export class LeadsManagementService {
     try {
       let query = `call spGetDataCRM_RMCallerDashboard(?,?,?,?);`;
       const res = await this.conn.query(query, [
-        CompCode, 
+        CompCode,
         TranType,
         FromDate,
         ToDate,
@@ -352,6 +352,22 @@ export class LeadsManagementService {
     try {
       let query = `call spGetDataCRMHighPrioritiesLeads(?)`;
       const res = await this.conn.query(query, [pCompCode]);
+      // let userData = null;
+      // if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
+      // }
+      return { message: "successful", data: res[0] };
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException();
+    }
+  }
+
+  // spValidateLeadMobNo
+
+  async validateLeadMobNo(pCompCode, pLeadMob): Promise<any> {
+    try {
+      let query = `call spValidateLeadMobNo(?,?)`;
+      const res = await this.conn.query(query, [pCompCode, pLeadMob]);
       // let userData = null;
       // if (res[0] && res[0].length > 0 && res[1] && res[1].length > 0) {
       // }
