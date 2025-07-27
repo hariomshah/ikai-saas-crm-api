@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "192.168.0.159",
+  "host": "127.0.0.1",
   "port": 3306,
   "username": "root",
-  "password": "Skyelint@2020",
-  "database": "ikai-saas-crm-dev",
+  "password": "Hariom@1992",
+  "database": "moneytick",
   "synchronize": false
 }

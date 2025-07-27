@@ -1,4 +1,5 @@
-import { Module, HttpModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
+import { HttpModule } from "@nestjs/axios";
 import { HelpController } from "./help.controller";
 import { HelpService } from "./help.service";
 // import { PassportModule } from '@nestjs/passport';

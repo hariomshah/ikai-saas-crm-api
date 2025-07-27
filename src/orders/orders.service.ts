@@ -2,8 +2,8 @@ import {
   Injectable,
   Logger,
   InternalServerErrorException,
-  HttpService,
 } from "@nestjs/common";
+import { HttpService } from "@nestjs/axios";
 import { Connection } from "typeorm";
 import { map } from "rxjs/operators";
 import { request } from "express";

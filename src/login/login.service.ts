@@ -2,11 +2,10 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
-  HttpService,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { JwtPayloadCommon } from "../auth/jwt-payload.interface";
-
+import { HttpService } from "@nestjs/axios";
 import { NotifyEventsService } from "../notify-events/notify-events.service";
 import { Connection } from "typeorm";
 

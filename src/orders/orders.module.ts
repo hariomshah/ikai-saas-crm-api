@@ -1,4 +1,5 @@
-import { Module, HttpModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
+import { HttpModule } from "@nestjs/axios";
 import { OrdersController } from "./orders.controller";
 import { OrdersService } from "./orders.service";
 import { NotifyEventsService } from "../notify-events/notify-events.service";

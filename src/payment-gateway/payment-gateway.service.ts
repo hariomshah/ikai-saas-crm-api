@@ -2,8 +2,8 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
-  HttpService,
 } from "@nestjs/common";
+import { HttpService } from "@nestjs/axios";
 import { RecieptService } from "../reciept/reciept.service";
 import { SysSequenceConfigmasterService } from "../sys-sequence-configmaster/sys-sequence-configmaster.service";
 import { NotifyEventsService } from "../notify-events/notify-events.service";

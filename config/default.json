@@ -1,19 +1,19 @@
 {
   "jwt": {
     "expiresIn": "10h",
-    "secret": "Skyelint23"
+    "secret": "Vedanta@2025"
   },
   "appConfig": {
     "RAZORPAY_UID": "rzp_live_pEW05RafkxhITF",
     "RAZORPAY_PSWD": "2jyXMNgCIjI04o2BkgtJFAtf",
     "RAZORPAY_API": "https://api.razorpay.com/v1/orders",
-    "CRYPTO_SECRET_KEY": "Skyelint@2020",
+    "CRYPTO_SECRET_KEY": "Hariom@1992",
     "ENABLE_JWT_AUTH": true,
-    "DB_HOST": "202.134.191.142",
+    "DB_HOST": "192.168.1.13",
     "DB_USER": "root",
-    "DB_PORT": "3166",
-    "DB_PASSWORD": "Skyelint@2020",
-    "DB_SCHEMANAME": "ikai-saas",
+    "DB_PORT": "3066",
+    "DB_PASSWORD": "Hariom@1992",
+    "DB_SCHEMANAME": "moneytick",
     "PoolNotificationProcessPeriodMins": 10,
     "CurrentAPIVersion": "1.0.1"
   }

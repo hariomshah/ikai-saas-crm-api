@@ -1,4 +1,5 @@
-import { Module, HttpModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
+import { HttpModule } from "@nestjs/axios";
 import { PaymentGatewayService } from "./payment-gateway.service";
 import { PaymentGatewayController } from "./payment-gateway.controller";
 import { NotifyEmailService } from "../notify-email/notify-email.service";

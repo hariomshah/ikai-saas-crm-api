@@ -1,9 +1,9 @@
 import {
   Injectable,
   InternalServerErrorException,
-  Logger,
-  HttpService,
+  Logger
 } from "@nestjs/common";
+import { HttpService } from "@nestjs/axios";
 import { Connection } from "typeorm";
 
 @Injectable()

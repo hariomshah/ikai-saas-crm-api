@@ -1,4 +1,5 @@
-import { Module, HttpModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
+import { HttpModule } from "@nestjs/axios";
 
 import { ScheduleModule } from "@nestjs/schedule";
 
@@ -95,11 +96,21 @@ import { AppLayoutUsersController } from "./app-layout-users/app-layout-users.co
 import { AppLayoutUsersModule } from "./app-layout-users/app-layout-users.module";
 import { AppRouteModule } from "./app-route/app-route.module";
 import { LeadsManagementModule } from './leads-management/leads-management.module';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const ormConfig = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '../ormconfig.json'), 'utf-8')
+);
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    // TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+      ...ormConfig,
+      autoLoadEntities: true, // optional
+    }),
     ScheduleModule.forRoot(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "uploads"),
@@ -194,7 +205,7 @@ import { LeadsManagementModule } from './leads-management/leads-management.modul
     AppLayoutUsersModule,
     AppRouteModule,
     LeadsManagementModule,
-    
+
   ],
   providers: [
     NotifyEmailService,
@@ -211,7 +222,7 @@ import { LeadsManagementModule } from './leads-management/leads-management.modul
     SelfOrderController,
     ConfigTableQrController,
     AppLayoutUsersController,
-    
+
   ],
 })
-export class AppModule {}
+export class AppModule { }
